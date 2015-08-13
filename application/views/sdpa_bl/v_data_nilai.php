@@ -29,6 +29,7 @@ $sem = $this->uri->segment(3);
 ?>
 
 <br>
+<div class="table-responsive">
 <table class="table table-bordered table-hover table-compact">
   <thead>
     <tr>
@@ -143,6 +144,7 @@ $sem = $this->uri->segment(3);
     ?>
   </tbody>
 </table>
+</div>
 
 <!-- MODAL TAMBAH LATIHAN -->
 <div class="modal fade bs-example-modal" id="add-latihan" tabindex="-1" role="dialog" aria-hidden="true">

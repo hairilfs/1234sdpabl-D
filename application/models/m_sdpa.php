@@ -403,4 +403,14 @@ class M_sdpa extends CI_Model {
 		return $data->result_array();
 
 	}
+
+	// Walikelas data siswa
+
+	public function getWalikelasDataSiswa($where = "") {
+
+		$data = $this->db->query('select * from guru a, kelas b, siswa c, peserta d, walikelas e '.$where);
+
+		return $data->result_array();
+
+	}
 }

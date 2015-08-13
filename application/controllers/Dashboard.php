@@ -110,10 +110,23 @@ public function master_jadwal() {
 
 public function master_jadwal_guru() {
 
-  $asd = $this->session->userdata('u_id');
-  $data = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-  $data2 = $this->m_sdpa->get_data_jadwal_guru("where a.employee_id=b.employee_id AND a.kd_mapel=c.kd_mapel AND a.kd_kelas=d.kd_kelas AND a.employee_id = '$asd' ");
-  $this->template->load('vtemplate_guru','sdpa_bl/v_lihat_jadwal_guru', array('isi' => $data, 'isi2' => $data2));
+  $asd    = $this->session->userdata('u_id');
+  $data   = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
+  $data4  = $this->m_sdpa->get_data_jadwal_guru("where a.employee_id=b.employee_id AND a.kd_mapel=c.kd_mapel AND a.kd_kelas=d.kd_kelas AND a.employee_id = '$asd' ");
+  $data2  = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+  $this->template->load('vtemplate_guru','sdpa_bl/v_lihat_jadwal_guru', array('isi' => $data, 'isi4' => $data4, 'isi2' => $data2));
+
+}
+
+public function master_walikelas_data_siswa() {
+
+  $asd    = $this->session->userdata('u_id');
+  $data   = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
+  $data4  = $this->m_sdpa->get_data_jadwal_guru("where a.employee_id=b.employee_id AND a.kd_mapel=c.kd_mapel AND a.kd_kelas=d.kd_kelas AND a.employee_id = '$asd' ");
+  $data2  =$this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+  $data3  = $this->m_sdpa->getWalikelasDataSiswa("where a.employee_id=e.Employee_id and b.kd_kelas=d.kd_kelas and c.NIS=d.nis and d.kd_kelas=e.Kd_kelas and e.Employee_id='$asd' ");
+
+  $this->template->load('vtemplate_guru','sdpa_bl/v_lihat_siswa_walikelas', array('isi' => $data, 'isi4' => $data4, 'isi3' => $data3, 'isi2' => $data2));
 
 }
 
@@ -136,6 +149,7 @@ public function daftar_jadwal() {
 
   $this->template->load('vtemplate_guru','sdpa_bl/v_daftar_jadwal', array('isi_jadwal' => $data, 'isi_mapel' => $data2, 'isi' => $data3, 'isi2' => $data4));
 }
+
 
 public function master_nilai($semester,$kelas,$jadwal) {
   if(isset($kelas) AND isset($jadwal)) {

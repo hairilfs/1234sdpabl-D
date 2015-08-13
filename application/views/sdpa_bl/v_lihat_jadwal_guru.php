@@ -16,7 +16,7 @@
 	<tbody>
 		<?php 
 			$no = 1; 
-			foreach ($isi2 as $key2) { 
+			foreach ($isi4 as $key2) { 
 		?>
 
 		<tr>

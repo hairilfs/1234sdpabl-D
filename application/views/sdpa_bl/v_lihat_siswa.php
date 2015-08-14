@@ -74,319 +74,294 @@
         </div>
         <!-- /modal -->
         
-        <!-- Update -->
-        <!-- modal -->
-        <div class="modal fade bs-example-modal-lg" id="edit-sis<?= $key['NIS']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <!-- ediy siswa -->
+        <div class="modal fade bs-example-modal-lg" id="edit-sis<?= $key['NIS']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
+                    <!-- modal header -->
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-
-                        <h4 class="modal-title" id="myModalLabel2">Edit Data Siswa</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h3 class="modal-title" id="myModalLabel2">Ubah Data Siswa</h3>
                     </div>
 
-                    <div class="modal-body">
-                        <form class="form-horizontal form-label-left" action="<?= base_url(); ?>dashboard/do_edit_siswa" method="post" enctype="multipart/form-data">
-                            <!-- modal body -->
-                            <div class="modal-body">
-                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                                        <li role="presentation" class="active"><a href="#tab_content1_edit" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Data 1</a></li>
-                                        <li role="presentation" class=""><a href="#tab_content2_edit" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Data 2</a></li>
-                                    </ul>
-
-                                    <div id="myTabContent" class="tab-content">
-                                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1_edit" aria-labelledby="home-tab">
-                                            <div class="row">
-                                                <div class="col-md-6">
+                    <form class="form-horizontal form-label-left" action="<?= base_url(); ?>dashboard/do_edit_siswa" method="post" enctype="multipart/form-data">
+                        <!-- modal body -->
+                        <div class="modal-body">
+                            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#tab_content1_edit<?= $key['NIS']; ?>" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Data 1</a>
+                                    </li>
+                                    <li role="presentation" class=""><a href="#tab_content2_edit<?= $key['NIS']; ?>" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Data 2</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContent" class="tab-content">
+                                    <!-- tab panel ke 1 -->
+                                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1_edit<?= $key['NIS']; ?>" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="padding-bottom:8%;">
                                                     <input name="nis" type="hidden" class="form-control" value="<?= $key['NIS']; ?>">
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">NISN</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="nisn" type="text" class="form-control" value="<?= $key['NISN']; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="nama" type="text" class="form-control" value="<?= $key['Nama']; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tmpt Lahir</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="tempat_lahir" type="text" class="form-control" value="<?= $key['Tempat_lahir']; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tgl Lahir</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="tanggal_lahir" type="text" class="form-control" value="<?= $key['Tanggal_lahir']; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Agama</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <select name="agama" class="form-control"  value="<?= $key['Agama']; ?>">
-                                                                <option>Pilih Agama</option>
-                                                                <option value="Islam" <?php if($key['Agama'] == 'Islam') echo 'selected="selected"'; ?>>Islam</option>
-                                                                <option value="Kristen" <?php if($key['Agama'] == 'Kristen') echo 'selected="selected"'; ?>>Kristen Protestan</option>
-                                                                <option value="Katolik" <?php if($key['Agama'] == 'Katolik') echo 'selected="selected"'; ?>>Kristen Katolik</option>
-                                                                <option value="Budha" <?php if($key['Agama'] == 'Budha') echo 'selected="selected"'; ?>>Budha</option>
-                                                                <option value="Hindu" <?php if($key['Agama'] == 'Hindu') echo 'selected="selected"'; ?>>Hindu</option>
-                                                                <option value="konghuchu" <?php if($key['Agama'] == 'konghuchu') echo 'selected="selected"'; ?>>Kong Hu Chu</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Jns Kelamin</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <select name="jenis_kelamin" class="form-control" >
-                                                                <option>Pilih Jenis Kelamin</option>
-                                                                <option value="Laki-Laki" <?php if($key['Jenis_kelamin'] == 'Laki-Laki') echo 'selected="selected"'; ?>>Laki-Laki</option>
-                                                                <option value="Perempuan" <?php if($key['Jenis_kelamin'] == 'Perempuan') echo 'selected="selected"'; ?>>Perempuan</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Foto</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="filefoto" type="file" class="form-control">
-                                                        </div>
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">NISN</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="nisn" type="text" class="form-control" value="<?= $key['NISN']; ?>">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Ayah</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="nama_ayah" type="text" class="form-control" value="<?= $key['Nama_ayah']; ?>">
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="nama" type="text" class="form-control" value="<?= $key['Nama']; ?>">
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Ibu</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="nama_ibu" type="text" class="form-control" value="<?= $key['Nama_ibu']; ?>">
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Tmpt Lahir</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="tempat_lahir" type="text" class="form-control" value="<?= $key['Tempat_lahir']; ?>" placeholder=" Contoh: Jakarta">
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Kwn</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <select name="kewarganegaraan" class="form-control" >
-                                                                <option>Pilih Kewarganegaraan</option>
-                                                                <option value="Indonesia" <?php if($key['Kewarganegaraan'] == 'Indonesia') echo 'selected="selected"'; ?>>Indonesia</option>
-                                                                <option value="Inggris" <?php if($key['Kewarganegaraan'] == 'Inggris') echo 'selected="selected"'; ?>>Inggris</option>
-                                                                <option value="Belanda" <?php if($key['Kewarganegaraan'] == 'Belanda') echo 'selected="selected"'; ?>>Belanda</option>
-                                                                <option value="Jerman" <?php if($key['Kewarganegaraan'] == 'Jerman') echo 'selected="selected"'; ?>>Jerman</option>
-                                                                <option value="Cina" <?php if($key['Kewarganegaraan'] == 'Cina') echo 'selected="selected"'; ?>>cina</option>
-                                                                <option value="Jepang" <?php if($key['Kewarganegaraan'] == 'Jepang') echo 'selected="selected"'; ?>>Jepang</option>
-                                                            </select>
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Tgl Lahir</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="tanggal_lahir" type="date" class="form-control" value="<?= $key['Tanggal_lahir']; ?>">
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Warga</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <select name="warga_negara" class="form-control" >
-                                                                <option>Pilih Warga Negara</option>
-                                                                <option value="WNI" <?php if($key['Warga_negara'] == 'WNI') echo 'selected="selected"'; ?>>Warga Negara Indonesia (WNI)</option>
-                                                                <option value="WNA" <?php if($key['Warga_negara'] == 'WNA') echo 'selected="selected"'; ?>>Warga Negara Asing (WNA)</option>
-                                                            </select>
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Agama</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select name="agama" class="form-control"  value="<?= $key['Agama']; ?>">
+                                                            <option>Pilih Agama</option>
+                                                            <option value="Islam" <?php if($key['Agama'] == 'Islam') echo 'selected="selected"'; ?>>Islam</option>
+                                                            <option value="Kristen" <?php if($key['Agama'] == 'Kristen') echo 'selected="selected"'; ?>>Kristen Protestan</option>
+                                                            <option value="Katolik" <?php if($key['Agama'] == 'Katolik') echo 'selected="selected"'; ?>>Kristen Katolik</option>
+                                                            <option value="Budha" <?php if($key['Agama'] == 'Budha') echo 'selected="selected"'; ?>>Budha</option>
+                                                            <option value="Hindu" <?php if($key['Agama'] == 'Hindu') echo 'selected="selected"'; ?>>Hindu</option>
+                                                            <option value="konghuchu" <?php if($key['Agama'] == 'konghuchu') echo 'selected="selected"'; ?>>Kong Hu Chu</option>
+                                                            <option value="Lainnya"<?php if ($key['Agama']=="Lainnya")  echo 'selected=selected';?>>Lainnya</option>
+                                                        </select>
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Anak</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <select name="status_anak" class="form-control" >
-                                                                <option>Pilih Status Anak</option>
-                                                                <option value="Kandung" <?php if($key['Status_anak'] == 'Kandung') echo 'selected="selected"'; ?>>Kandung</option>
-                                                                <option value="Angkat" <?php if($key['Status_anak'] == 'Angkat') echo 'selected="selected"'; ?>>Angkat</option>
-                                                            </select>
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Jns Kelamin</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select name="jenis_kelamin" class="form-control" >
+                                                            <option>Pilih Jenis Kelamin</option>
+                                                            <option value="Laki-Laki" <?php if($key['Jenis_kelamin'] == 'Laki-Laki') echo 'selected="selected"'; ?>>Laki-Laki</option>
+                                                            <option value="Perempuan" <?php if($key['Jenis_kelamin'] == 'Perempuan') echo 'selected="selected"'; ?>>Perempuan</option>
+                                                        </select>
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Alamat</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <textarea name="alamat" type="text" class="form-control"><?= $key['Alamat']; ?></textarea>
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Foto</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="filefoto" type="file" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>          
 
-                                        <div role="tabpanel" class="tab-pane fade in" id="tab_content2_edit" aria-labelledby="profile-tab">
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Ayah</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="nama_ayah" type="text" class="form-control" value="<?= $key['Nama_ayah']; ?>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Ibu</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="nama_ibu" type="text" class="form-control" value="<?= $key['Nama_ibu']; ?>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Kwn</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="kewarganegaraan" type="text" class="form-control" value="<?= $key['Kewarganegaraan']; ?>" placeholder=' Contoh: Indonesia'>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Warga</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select name="warga_negara" class="form-control" >
+                                                            <option>Pilih Warga Negara</option>
+                                                            <option value="WNI" <?php if($key['Warga_negara'] == 'WNI') echo 'selected="selected"'; ?>>Warga Negara Indonesia (WNI)</option>
+                                                            <option value="WNA" <?php if($key['Warga_negara'] == 'WNA') echo 'selected="selected"'; ?>>Warga Negara Asing (WNA)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Anak</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select name="status_anak" class="form-control" >
+                                                            <option>Pilih Status Anak</option>
+                                                            <option value="Kandung" <?php if($key['Status_anak'] == 'Kandung') echo 'selected="selected"'; ?>>Kandung</option>
+                                                            <option value="Angkat" <?php if($key['Status_anak'] == 'Angkat') echo 'selected="selected"'; ?>>Angkat</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Alamat</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <textarea name="alamat" type="text" class="form-control"><?= $key['Alamat']; ?></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            </div>
+
+                                            <!-- tab panel ke 2 -->
+                                            <div role="tabpanel" class="tab-pane fade" id="tab_content2_edit<?= $key['NIS']; ?>" aria-labelledby="profile-tab">
                                             <div class="row">
-                                                <div class="col-md-6">
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tinggi</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="tinggi_badan" type="text" class="form-control" value="<?= $key['Tinggi_badan']; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Berat</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="berat_badan" type="text" class="form-control" value="<?= $key['Berat_badan']; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Anak Ke</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <select name="anak_ke" class="form-control" >
-                                                                <option>Pilih Anak Ke</option>
-                                                                <option value="1" <?php if($key['Anak_ke'] == '1') echo 'selected="selected"'; ?>>1</option>
-                                                                <option value="2" <?php if($key['Anak_ke'] == '2') echo 'selected="selected"'; ?>>2</option>
-                                                                <option value="3" <?php if($key['Anak_ke'] == '3') echo 'selected="selected"'; ?>>3</option>
-                                                                <option value="4" <?php if($key['Anak_ke'] == '4') echo 'selected="selected"'; ?>>4</option>
-                                                                <option value="5" <?php if($key['Anak_ke'] == '5') echo 'selected="selected"'; ?>>5</option>
-                                                                <option value="6" <?php if($key['Anak_ke'] == '6') echo 'selected="selected"'; ?>>6</option>
-                                                                <option value="7" <?php if($key['Anak_ke'] == '7') echo 'selected="selected"'; ?>>7</option>
-                                                                <option value="8" <?php if($key['Anak_ke'] == '8') echo 'selected="selected"'; ?>>8</option>
-                                                                <option value="9" <?php if($key['Anak_ke'] == '9') echo 'selected="selected"'; ?>>9</option>
-                                                                <option value="10" <?php if($key['Anak_ke'] == '10') echo 'selected="selected"'; ?>>10</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Jml Saudara</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <select name="jumlah_saudara" class="form-control" >
-                                                                <option>Pilih Jumlah Saudara</option>
-                                                                <option value="1" <?php if($key['Jumlah_saudara'] == '1') echo 'selected="selected"'; ?>>1</option>
-                                                                <option value="2" <?php if($key['Jumlah_saudara'] == '2') echo 'selected="selected"'; ?>>2</option>
-                                                                <option value="3" <?php if($key['Jumlah_saudara'] == '3') echo 'selected="selected"'; ?>>3</option>
-                                                                <option value="4" <?php if($key['Jumlah_saudara'] == '4') echo 'selected="selected"'; ?>>4</option>
-                                                                <option value="5" <?php if($key['Jumlah_saudara'] == '5') echo 'selected="selected"'; ?>>5</option>
-                                                                <option value="6" <?php if($key['Jumlah_saudara'] == '6') echo 'selected="selected"'; ?>>6</option>
-                                                                <option value="7" <?php if($key['Jumlah_saudara'] == '7') echo 'selected="selected"'; ?>>7</option>
-                                                                <option value="8" <?php if($key['Jumlah_saudara'] == '8') echo 'selected="selected"'; ?>>8</option>
-                                                                <option value="9" <?php if($key['Jumlah_saudara'] == '9') echo 'selected="selected"'; ?>>9</option>
-                                                                <option value="10" <?php if($key['Jumlah_saudara'] == '10') echo 'selected="selected"'; ?>>10</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Gol Darah</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <select name="golongan_darah" class="form-control" >
-                                                                <option>Pilih Golongan Darah</option>
-                                                                <option value="A" <?php if($key['Golongan_darah'] == 'A') echo 'selected="selected"'; ?>>A</option>
-                                                                <option value="B" <?php if($key['Golongan_darah'] == 'B') echo 'selected="selected"'; ?>>B</option>
-                                                                <option value="AB" <?php if($key['Golongan_darah'] == 'AB') echo 'selected="selected"'; ?>>AB</option>
-                                                                <option value="O" <?php if($key['Golongan_darah'] == 'O') echo 'selected="selected"'; ?>>O</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Telp Rumah</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="telepon_rumah" type="text" class="form-control" value="<?= $key['Telepon_rumah']; ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">No. HP</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="nomor_hp" type="text" class="form-control" value="<?= $key['Nomor_hp']; ?>">
-                                                        </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Tinggi</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="tinggi_badan" type="text" class="form-control" value="<?= $key['Tinggi_badan']; ?>" placeholder=" Contoh: 170">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Wajah</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="wajah" type="text" class="form-control" value="<?= $key['Wajah']; ?>">
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Berat</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="berat_badan" type="text" class="form-control" value="<?= $key['Berat_badan']; ?>" placeholder=" Contoh: 60">
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Rambut</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="rambut" type="text" class="form-control" value="<?= $key['Rambut']; ?>">
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Anak Ke</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="anak_ke" type="number" class="form-control" value="<?= $key['Anak_ke']; ?>" placeholder=" Contoh: 1">
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">AsalSekolah</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="asal_sekolah" type="text" class="form-control" value="<?= $key['Asal_sekolah']; ?>">
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Jml Saudara</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="jumlah_saudara" type="number" class="form-control" value="<?= $key['Jumlah_saudara']; ?>" placeholder=" Contoh: 1">
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group" style="padding-bottom:23%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Prestasi</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <textarea name="prestasi" type="text" class="form-control"><?= $key['Prestasi']; ?></textarea>
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Gol Darah</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select name="golongan_darah" class="form-control" >
+                                                            <option>Pilih Golongan Darah</option>
+                                                            <option value="A" <?php if($key['Golongan_darah'] == 'A') echo 'selected="selected"'; ?>>A</option>
+                                                            <option value="B" <?php if($key['Golongan_darah'] == 'B') echo 'selected="selected"'; ?>>B</option>
+                                                            <option value="AB" <?php if($key['Golongan_darah'] == 'AB') echo 'selected="selected"'; ?>>AB</option>
+                                                            <option value="O" <?php if($key['Golongan_darah'] == 'O') echo 'selected="selected"'; ?>>O</option>
+                                                        </select>
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Penyakit</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <textarea name="penyakit_riwayat" type="text" class="form-control"><?= $key['Penyakit_riwayat']; ?></textarea>
-                                                        </div>
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Telp Rumah</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="telepon_rumah" type="text" class="form-control" value="<?= $key['Telepon_rumah']; ?>" placeholder=" Contoh: 0217338556">
                                                     </div>
+                                                </div>
 
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">No. HP</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="nomor_hp" type="text" class="form-control" value="<?= $key['Nomor_hp']; ?>" placeholder=" Contoh: 087736317753">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>          
-                                    </div>
-                                </div>  
-                            </div>
 
-                            <!-- modal footer -->
-                            <div class="modal-footer ">
-                                <div class="pull-right">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Wajah</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select name="wajah" class="form-control" value="<?= $key['wajah']; ?>">
+                                                            <option value="Bulat" <?php if($key['Wajah'] == 'Bulat') echo 'selected="selected"'; ?>>Bulat</option>
+                                                            <option value="Lonjong" <?php if($key['Wajah'] == 'Lonjong') echo 'selected="selected"'; ?>>Lonjong</option>
+                                                            <option value="Kotak" <?php if($key['Wajah'] == 'Kotak') echo 'selected="selected"'; ?>>Kotak</option>
+                                                            <option value="Lainnya" <?php if($key['Wajah'] == 'Lainnya') echo 'selected="selected"'; ?>>Lainnya</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Rambut</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <select name="rambut" class="form-control" value="<?= $key['rambut']; ?>">
+                                                            <option value="Ikal" <?php if($key['Rambut'] == 'Ikal') echo 'selected="selected"'; ?>>Ikal</option>
+                                                            <option value="Keriting" <?php if($key['Rambut'] == 'Keriting') echo 'selected="selected"'; ?>>Keriting</option>
+                                                            <option value="Lurus" <?php if($key['Rambut'] == 'Lurus') echo 'selected="selected"'; ?>>Lurus</option>
+                                                            <option value="Lainnya" <?php if($key['Rambut'] == 'Lainnya') echo 'selected="selected"'; ?>>Lainnya</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="padding-bottom:8%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">AsalSekolah</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <input name="asal_sekolah" type="text" class="form-control" value="<?= $key['Asal_sekolah']; ?>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" style="padding-bottom:23%;">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Prestasi</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <textarea name="prestasi" type="text" class="form-control" placeholder=" Contoh: Juara 1 Olimpiade Bahasa Jerman"><?= $key['Prestasi']; ?></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Penyakit</label>
+                                                    
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <textarea name="penyakit_riwayat" type="text" class="form-control" placeholder=" Contoh: Diabetes Tipe 1, Demam Berdarah"><?= $key['Penyakit_riwayat']; ?></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <!-- modal footer -->
+                        <div class="modal-footer ">
+                            <div class="pull-right">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                              <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -640,7 +615,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tempat Lahir</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <input name="tempat_lahir" type="text" class="form-control">
+                                                <input name="tempat_lahir" type="text" class="form-control" placeholder=" Contoh: Jakarta">
                                             </div>
                                         </div>
 
@@ -648,7 +623,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Lahir</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <input name="tanggal_lahir" type="text" class="form-control">
+                                                <input name="tanggal_lahir" type="date" class="form-control">
                                             </div>
                                         </div>
 
@@ -664,6 +639,7 @@
                                                     <option value="Budha">Budha</option>
                                                     <option value="Hindu">Hindu</option>
                                                     <option value="konghuchu">Kong Hu Chu</option>
+                                                    <option value="Lainnya">Lainnya</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -710,15 +686,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Kewarga negaraan</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <select name="kewarganegaraan" class="form-control" required>
-                                                    <option>Pilih Kewarganegaraan</option>
-                                                    <option value="Indonesia">Indonesia</option>
-                                                    <option value="Inggris">Inggris</option>
-                                                    <option value="Belanda">Belanda</option>
-                                                    <option value="Jerman">Jerman</option>
-                                                    <option value="Cina">cina</option>
-                                                    <option value="Jepang">Jepang</option>
-                                                </select>
+                                                <input name="kewarganegaraan" type="text" class="form-control" placeholder=" Contoh: Indonesia">
                                             </div>
                                         </div>
 
@@ -765,7 +733,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tinggi Badan</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <input name="tinggi_badan" type="text" class="form-control">
+                                                <input name="tinggi_badan" type="number" class="form-control" placeholder=" Contoh: 170">
                                             </div>
                                         </div>
 
@@ -773,7 +741,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Berat Badan</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <input name="berat_badan" type="text" class="form-control">
+                                                <input name="berat_badan" type="text" class="form-control" placeholder=" Contoh: 60">
                                             </div>
                                         </div>
 
@@ -781,14 +749,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Anak Ke</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <select name="anak_ke" class="form-control" required>
-                                                    <option>Pilih Anak Ke</option>
-                                                    <?php 
-                                                        for($i='1';$i<=20;$i++){
-                                                            echo "<option value='$i'>$i</option>";
-                                                        }
-                                                    ?>
-                                                </select>
+                                                <input name="anak_ke" type="number" class="form-control" placeholder=" Contoh: 1">
                                             </div>
                                         </div>
 
@@ -796,14 +757,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Jumlah Saudara</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <select name="jumlah_saudara" class="form-control" required>
-                                                    <option>Pilih Jumlah Saudara</option>
-                                                    <?php 
-                                                        for($i='1';$i<=20;$i++){
-                                                            echo "<option value='$i'>$i</option>";
-                                                        }
-                                                    ?>
-                                                </select>
+                                                <input name="jumlah_saudara" type="number" class="form-control" placeholder=" Contoh: 1">
                                             </div>
                                         </div>
 
@@ -825,7 +779,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Telepon Rumah</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <input name="telepon_rumah" type="text" class="form-control">
+                                                <input name="telepon_rumah" type="text" class="form-control" placeholder=" Contoh: 0217338556">
                                             </div>
                                         </div>
 
@@ -833,7 +787,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Nomor HP</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <input name="nomor_hp" type="text" class="form-control">
+                                                <input name="nomor_hp" type="text" class="form-control" placeholder=" Contoh: 087736317753">
                                             </div>
                                         </div>
                                     </div>
@@ -843,7 +797,13 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Wajah</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <input name="wajah" type="text" class="form-control">
+                                                <select name="wajah" class="form-control" required>
+                                                    <option>Pilih Wajah</option>
+                                                    <option value="Bulat">Bulat</option>
+                                                    <option value="Lonjong">Lonjong</option>
+                                                    <option value="Kotak">Kotak</option>
+                                                    <option value="Lainnya">Lainnya</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -851,7 +811,13 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Rambut</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <input name="rambut" type="text" class="form-control">
+                                                <select name="rambut" class="form-control" required>
+                                                    <option>Pilih Rambut</option>
+                                                    <option value="Ikal">Ikal</option>
+                                                    <option value="Keriting">Keriting</option>
+                                                    <option value="Lurus">Lurus</option>
+                                                    <option value="Lainnya">Lainnya</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -867,7 +833,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Prestasi</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <textarea name="prestasi" type="text" class="form-control"></textarea>
+                                                <textarea name="prestasi" type="text" class="form-control" placeholder=" Contoh: Juara 1 Olimpiade Bahasa Jerman"></textarea>
                                             </div>
                                         </div>
 
@@ -875,7 +841,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Penyakit Riwayat</label>
                                             
                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <textarea name="penyakit_riwayat" type="text" class="form-control"></textarea>
+                                                <textarea name="penyakit_riwayat" type="text" class="form-control" placeholder=" Contoh: Diabetes Tipe 1, Demam Berdarah"></textarea>
                                             </div>
                                         </div>
 

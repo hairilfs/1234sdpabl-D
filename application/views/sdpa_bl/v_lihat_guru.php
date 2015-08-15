@@ -301,8 +301,7 @@
                           <div class="form-group" style="padding-bottom:8%;">
                             <label class="control-label col-md-4 col-sm-3 col-xs-12">Foto</label>
                             <div class="col-md-8 col-sm-9 col-xs-12">
-                              <input name="foto" type="text" class="form-control" value="<?= $key['foto']; ?>">
-                              <input name="foto" type="file" class="form-control" >
+                              <input name="fotox" type="file" class="form-control" >
                             </div>
                           </div>
                           <div class="form-group" style="padding-bottom:8%;">

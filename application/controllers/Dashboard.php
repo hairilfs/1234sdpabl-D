@@ -400,11 +400,24 @@ public function do_edit_guru() {
   $config['file_name']      = $nmfile;
 
   $this->upload->initialize($config);
-  $this->upload->do_upload('foto');
+  $this->upload->do_upload('fotox');
 
   $gbr  = $this->upload->data();
   $foto = base_url()."assets/uploads/".$gbr['file_name'];
 
+  /*$employee_id = $_POST['employee_id'];
+  $data = $this->m_sdpa->get_data_guru("where employee_id='$employee_id'");
+  
+
+  if($_FILES['fotox']['size']!=0) {
+      $foto = base_url()."assets/uploads/".$gbr['file_name'];
+  } else {
+      foreach ($data as $key_data) {
+          $foto = $key_data['foto'];
+      }
+  }*/
+
+  if($_FILES['fotox']['size']!=0) {
   $data_update = array(
     'employee_id'       => $_POST['employee_id'],   'NIP'               => $_POST['nip'],
     'NUPTK'             => $_POST['nuptk'],         'nama_guru'         => $_POST['nama'],
@@ -431,6 +444,34 @@ public function do_edit_guru() {
     'rambut'            => $_POST['rambut'],        'pykt_derita'       => $_POST['riw_pykt'],
     'keahlian'          => $_POST['keahlian']
     );
+  } else {
+    $data_update = array(
+    'employee_id'       => $_POST['employee_id'],   'NIP'               => $_POST['nip'],
+    'NUPTK'             => $_POST['nuptk'],         'nama_guru'         => $_POST['nama'],
+    'tempat_lahir'      => $_POST['tmpt_lhr'],      'tanggal_lahir'     => $_POST['tgl_lhr'],
+    'jenis_kelamin'     => $_POST['jenkel'],        'alamat'            => $_POST['alamat'],
+    'agama'             => $_POST['agama'],         'kewarganegaraan'   => $_POST['kwngrn'],
+    'warga_negara'      => $_POST['wrg_ngr'],       'status_anak'       => $_POST['stat_anak'],
+    'anak_ke'           => $_POST['anak_ke'],       'status_pernikahan' => $_POST['stat_nikah'],
+    'tahun_menikah'     => $_POST['thn_mnkh'],      'telp_rumah'        => $_POST['telp_rmh'],
+    'no_hp'             => $_POST['no_hp'],         'email'             => $_POST['email'],
+    'jml_saudara'       => $_POST['jml_sdr'],       'thn_mulai_tugas'   => $_POST['thn_tgs'],
+    'no_sk_dinas'       => $_POST['no_sk_dns'],     'tgl_sk_dinas'      => $_POST['tgl_sk_dns'],
+    'bdg_studi_ajar'    => $_POST['b_studi_ajar'],  'mutasi_dari'       => $_POST['mutasi_dari'],
+    'no_sk_mutasi'      => $_POST['no_sk_mutasi'],  'stat_karyawan'     => $_POST['stat_kar'],
+    'gol_darah'         => $_POST['gol_dar'],       
+    'tempat_bekerja'    => $_POST['tmpt_krj'],      'jabatan'           => $_POST['jbtn'],
+    'pangkat_golongan'  => $_POST['pgkt_gol'],      'stat_pegawai'      => $_POST['stat_pegawai'],
+    'mengajar_dikelas'  => $_POST['mgjr_kls'],      'tugas_tambahan'    => $_POST['tgs_tmbhn'],
+    'tgkt_jnjg_pddkn'   => $_POST['pddk_terakhir'], 'thn_msk_pddkn'     => $_POST['thn_msk_pddk'],
+    'thn_lulus_pddkn'   => $_POST['thn_lls_pddk'],  'nama_bapak'        => $_POST['nm_bpk'],
+    'nama_ibu'          => $_POST['nm_ibu'],        'nama_suami'        => $_POST['nm_sm'],
+    'nama_istri'        => $_POST['nm_is'],         'tinggi_badan'      => $_POST['tg_bdn'],
+    'berat_badan'       => $_POST['brt_bdn'],       'wajah'             => $_POST['wajah'],
+    'rambut'            => $_POST['rambut'],        'pykt_derita'       => $_POST['riw_pykt'],
+    'keahlian'          => $_POST['keahlian']
+    );
+  }
 
   $res = $this->m_sdpa->update_data_guru('guru', $data_update, array('employee_id' => $_POST['employee_id']) );
 
@@ -1006,34 +1047,62 @@ public function do_edit_siswa() {
     $gbr        = $this->upload->data();
     $foto       = $gbr['file_name'];
 
-    $data_update= array(
-        'NISN'  => $nisn,
-        'Nama'  => $nama,
-        'Tempat_lahir'    => $tempat_lahir,
-        'Tanggal_lahir'   => $tanggal_lahir,
-        'Agama' => $agama,
-        'Jenis_kelamin'   => $jenis_kelamin,
-        'Alamat'          => $alamat,
-        'Nama_ayah'       => $nama_ayah,
-        'Nama_ibu'        => $nama_ibu,
-        'Kewarganegaraan' => $kewarganegaraan,
-        'Warga_negara'    => $warga_negara,
-        'Status_anak'     => $status_anak,
-        'Anak_ke'         => $anak_ke,
-        'Jumlah_saudara'  => $jumlah_saudara,
-        'Telepon_rumah'   => $telepon_rumah,
-        'Nomor_hp'        => $nomor_hp,
-        'Tinggi_badan'    => $tinggi_badan,
-        'Berat_badan'     => $berat_badan,
-        'Wajah' => $wajah,
-        'Rambut'=> $rambut,
-        'Golongan_darah'  => $golongan_darah,
-        'Penyakit_riwayat'=> $penyakit_riwayat,
-        'Asal_sekolah'    => $asal_sekolah,
-        'Prestasi'        => $prestasi,
-        'Foto'  => $foto
-    );
-
+    if($_FILES['filefoto']['size']!=0) {
+        $data_update= array(
+            'NISN'  => $nisn,
+            'Nama'  => $nama,
+            'Tempat_lahir'    => $tempat_lahir,
+            'Tanggal_lahir'   => $tanggal_lahir,
+            'Agama' => $agama,
+            'Jenis_kelamin'   => $jenis_kelamin,
+            'Alamat'          => $alamat,
+            'Nama_ayah'       => $nama_ayah,
+            'Nama_ibu'        => $nama_ibu,
+            'Kewarganegaraan' => $kewarganegaraan,
+            'Warga_negara'    => $warga_negara,
+            'Status_anak'     => $status_anak,
+            'Anak_ke'         => $anak_ke,
+            'Jumlah_saudara'  => $jumlah_saudara,
+            'Telepon_rumah'   => $telepon_rumah,
+            'Nomor_hp'        => $nomor_hp,
+            'Tinggi_badan'    => $tinggi_badan,
+            'Berat_badan'     => $berat_badan,
+            'Wajah' => $wajah,
+            'Rambut'=> $rambut,
+            'Golongan_darah'  => $golongan_darah,
+            'Penyakit_riwayat'=> $penyakit_riwayat,
+            'Asal_sekolah'    => $asal_sekolah,
+            'Prestasi'        => $prestasi,
+            'Foto'  => $foto
+        );
+    } else {
+        $data_update= array(
+            'NISN'  => $nisn,
+            'Nama'  => $nama,
+            'Tempat_lahir'    => $tempat_lahir,
+            'Tanggal_lahir'   => $tanggal_lahir,
+            'Agama' => $agama,
+            'Jenis_kelamin'   => $jenis_kelamin,
+            'Alamat'          => $alamat,
+            'Nama_ayah'       => $nama_ayah,
+            'Nama_ibu'        => $nama_ibu,
+            'Kewarganegaraan' => $kewarganegaraan,
+            'Warga_negara'    => $warga_negara,
+            'Status_anak'     => $status_anak,
+            'Anak_ke'         => $anak_ke,
+            'Jumlah_saudara'  => $jumlah_saudara,
+            'Telepon_rumah'   => $telepon_rumah,
+            'Nomor_hp'        => $nomor_hp,
+            'Tinggi_badan'    => $tinggi_badan,
+            'Berat_badan'     => $berat_badan,
+            'Wajah' => $wajah,
+            'Rambut'=> $rambut,
+            'Golongan_darah'  => $golongan_darah,
+            'Penyakit_riwayat'=> $penyakit_riwayat,
+            'Asal_sekolah'    => $asal_sekolah,
+            'Prestasi'        => $prestasi
+        );
+    }
     $res = $this->m_sdpa->updateData('siswa', $data_update, array('NIS' =>$nis));
     
     if ($res >= 1) {

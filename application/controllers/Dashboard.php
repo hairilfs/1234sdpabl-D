@@ -141,6 +141,48 @@ public function pilih_tahun() {
   $this->template->load('vtemplate_guru','sdpa_bl/v_penilaian_guru', array('isi' => $data, 'isi2' => $data2));
 }
 
+public function tahun_wali() {
+  $asd    = $this->session->userdata('u_id');
+  $data   = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
+  $data2  = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+  $this->template->load('vtemplate_guru','sdpa_bl/v_tahun_wali', array('isi' => $data, 'isi2' => $data2));
+}
+
+public function report_siswa() {
+  // if(isset($kelas) AND isset($jadwal)) {
+    $kd_jdw_now   = "";
+    $tahun        = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ;
+    $semester     = isset($_POST['semester']) ? $_POST['semester'] : '' ;
+    $asd          = $this->session->userdata('u_id');
+    $data_guru    = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+    $data_walkel  = $this->m_sdpa->getWalikelas("where Employee_id='$asd' ");
+    foreach ($data_walkel as $key_walkel) {
+      if ($key_walkel['Employee_id']==$asd) {
+        $kelas = $key_walkel['Kd_kelas'];
+      }
+    }
+    $data_peserta = $this->m_sdpa->get_data_peserta("where kd_kelas = '$kelas' ");
+    $data_jadwal  = $this->m_sdpa->get_data_jadwal("where thn_ajar='$tahun' and semester='$semester' and employee_id='$asd' ");
+    foreach ($data_jadwal as $key_jadwal) {
+      if ($key_jadwal['employee_id']==$asd && $key_jadwal['thn_ajar']==$tahun && $key_jadwal['semester']==$semester) {
+        $kd_jdw_now = "'".$key_jadwal['kd_jadwal']."'";
+      }
+    }
+    $data_mapel   = $this->m_sdpa->get_data_mapel();
+    $data_siswa   = $this->m_sdpa->get_data_siswa();
+    $data_latihan = $this->m_sdpa->get_data_latihan("where kd_jadwal in () ");
+    $data_kuis    = $this->m_sdpa->get_data_kuis();
+    $data_uas     = $this->m_sdpa->get_data_uas();
+    $data_uts     = $this->m_sdpa->get_data_uts();
+
+    $this->template->load('vtemplate_guru','sdpa_bl/v_report_siswa', array('data_latihan' => $data_latihan, 'a'=> $jadwal, 'isi' => $data_guru,
+    'isi_peserta' => $data_peserta, 'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas, 'data_uts' => $data_uts,
+    'data_jadwal' => $data_jadwal, 'data_mapel' => $data_mapel, 'isi2' => $data_guru));
+  // } else {
+  //   redirect("dashboard");
+  // }
+}
+
 public function daftar_jadwal() {
   $asd = $this->session->userdata('u_id');
   $tahun     = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ;
@@ -824,7 +866,7 @@ public function doEdit($nim) {
 /* Walikelas */
 
 public function master_walikelas() {
-  
+
     $data = $this->m_sdpa->getWalikelas();
     $data2  = $this->m_sdpa->getUser("where a.employee_id not in (select b.Employee_id from walikelas b)");
     $data3 = $this->m_sdpa->get_data_kelas();
@@ -847,7 +889,7 @@ public function do_insert_walikelas() {
     }
 
     $data_insert= array(
-        'Tahun_ajar_wali'   => $tahun_ajar_wali,  
+        'Tahun_ajar_wali'   => $tahun_ajar_wali,
         'Employee_id'       => $employee_id,
         'Kd_kelas'          => $kd_kelas
     );
@@ -857,18 +899,18 @@ public function do_insert_walikelas() {
     );
 
     $res2 = $this->m_sdpa->updateData('user', $data_update, array('id_user' =>$employee_id));
-    
+
     $res = $this->m_sdpa->insertData('walikelas', $data_insert);
-    
+
     if ($res >= 1 || $res2 >=1 ) {
-    
+
         $this->session->set_flashdata('pesan', 'Tambah data sukses!');
         redirect("dashboard/master_walikelas");
-    
+
     } else {
-      
+
         echo "Insert data gagal";
-    
+
     }
 }
 
@@ -887,9 +929,9 @@ public function do_edit_walikelas() {
     );
 
     $res = $this->m_sdpa->updateData('walikelas', $data_update, array('Kd_walikelas' =>$kd_walikelas));
-    
+
     if ($res >= 1) {
-    
+
       $this->session->set_flashdata('pesan', 'Update data sukses!');
       redirect("dashboard/master_walikelas");
 
@@ -916,7 +958,7 @@ public function do_delete_walikelas($kd_walikelas) {
 }
 
 public function master_siswa() {
-      
+
     $data = $this->m_sdpa->getSiswa();
     $this->template->load('vtemplate','sdpa_bl/v_lihat_siswa', array('isi' => $data));
 
@@ -924,13 +966,13 @@ public function master_siswa() {
 
 public function do_insert_siswa() {
     $this->load->library('upload');
-    $nmfile     = "file_".time(); 
+    $nmfile     = "file_".time();
     $config['upload_path']  = 'assets/uploads/';
-    $config['allowed_types']= 'gif|jpg|png|jpeg|bmp'; 
-    $config['max_size']     = '2048'; 
-    $config['max_width']    = '1288'; 
-    $config['max_height']   = '768'; 
-    $config['file_name']    = $nmfile; 
+    $config['allowed_types']= 'gif|jpg|png|jpeg|bmp';
+    $config['max_size']     = '2048';
+    $config['max_width']    = '1288';
+    $config['max_height']   = '768';
+    $config['file_name']    = $nmfile;
 
     $this->upload->initialize($config);
     $this->upload->do_upload('filefoto');
@@ -964,7 +1006,7 @@ public function do_insert_siswa() {
     $foto       = $gbr['file_name'];
 
     $data_insert= array(
-        'NIS'   => $nis,  
+        'NIS'   => $nis,
         'NISN'  => $nisn,
         'Nama'  => $nama,
         'Tempat_lahir'    => $tempat_lahir,
@@ -991,30 +1033,30 @@ public function do_insert_siswa() {
         'Prestasi'        => $prestasi,
         'Foto'  => $foto
     );
-    
+
     $res = $this->m_sdpa->insertData('siswa', $data_insert);
-    
+
     if ($res >= 1) {
-    
+
         $this->session->set_flashdata('pesan', 'Tambah data sukses!');
         redirect("dashboard/master_siswa");
-    
+
     } else {
-      
+
         echo "Insert data gagal";
-    
+
     }
 }
 
 public function do_edit_siswa() {
     $this->load->library('upload');
-    $nmfile     = "file_".time(); 
+    $nmfile     = "file_".time();
     $config['upload_path']  = 'assets/uploads/';
-    $config['allowed_types']= 'gif|jpg|png|jpeg|bmp'; 
-    $config['max_size']     = '2048'; 
-    $config['max_width']    = '1288'; 
-    $config['max_height']   = '768'; 
-    $config['file_name']    = $nmfile; 
+    $config['allowed_types']= 'gif|jpg|png|jpeg|bmp';
+    $config['max_size']     = '2048';
+    $config['max_width']    = '1288';
+    $config['max_height']   = '768';
+    $config['file_name']    = $nmfile;
 
     $this->upload->initialize($config);
     $this->upload->do_upload('filefoto');
@@ -1104,9 +1146,9 @@ public function do_edit_siswa() {
         );
     }
     $res = $this->m_sdpa->updateData('siswa', $data_update, array('NIS' =>$nis));
-    
+
     if ($res >= 1) {
-    
+
       $this->session->set_flashdata('pesan', 'Update data sukses!');
       redirect("dashboard/master_siswa");
 
@@ -1135,7 +1177,7 @@ public function do_delete_siswa($nis) {
 /* User */
 
 public function master_user() {
-  
+
     $data  = $this->m_sdpa->getUser("where a.employee_id not in (select b.id_user from user b)");
     $data2 = $this->m_sdpa->getUser2("where a.id_user = b.employee_id and (level = 'guru')");
     $data3 = $this->m_sdpa->getWalikelas();
@@ -1159,28 +1201,28 @@ public function do_insert_user() {
             $a= "N";
         }
     }
-                                        
+
     $level      = $_POST['level'];
     $password   = md5($_POST['password']);
 
     $data_insert= array(
-        'id_user'   => $user, 
-        'level'     => $level, 
+        'id_user'   => $user,
+        'level'     => $level,
         'password'  => $password,
         'walikelas' => $a
     );
-    
+
     $res = $this->m_sdpa->insertData('user', $data_insert);
-    
+
     if ($res >= 1) {
-    
+
         $this->session->set_flashdata('pesan', 'Tambah data sukses!');
         redirect("dashboard/master_user");
-    
+
     } else {
-      
+
         echo "Insert data gagal";
-    
+
     }
 }
 
@@ -1195,9 +1237,9 @@ public function do_edit_user() {
     );
 
     $res = $this->m_sdpa->updateData('user', $data_update, array('id_user' =>$id_user));
-    
+
     if ($res >= 1) {
-    
+
       $this->session->set_flashdata('pesan', 'Update data sukses!');
       redirect("dashboard/master_user");
 

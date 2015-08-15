@@ -71,9 +71,9 @@
                                                 foreach ($isi2 as $key_isi2) {
                                                     if(isset($key_isi2['employee_id'])) {
                                             ?>
-                                                        <li><a href="<?= base_url(); ?>dashboard/master_walikelas_data_siswa">Daftar Siswa ( Walikelas )  </a></li>
-                                                        <li><a href="<?= base_url(); ?>dashboard/master_walikelas_data_siswa">Report Siswa ( Walikelas )  </a></li>
-                                            <?php  
+                                                        <li><a href="<?= base_url(); ?>dashboard/master_walikelas_data_siswa">Daftar Siswa ( Wali kelas )  </a></li>
+                                                        <li><a href="<?= base_url(); ?>dashboard/tahun_wali">Report Siswa ( Wali kelas)</a></li>
+                                            <?php
                                                     }
                                                 }
                                             ?>

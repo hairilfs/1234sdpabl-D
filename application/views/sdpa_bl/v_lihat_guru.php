@@ -345,6 +345,12 @@
                               <input name="tgs_tmbhn" type="text" class="form-control" value="<?= $key['tugas_tambahan']; ?>">
                             </div>
                           </div>
+                          <div class="form-group" style="padding-bottom:8%;">
+                            <label class="control-label col-md-4 col-sm-3 col-xs-12">Keahlian</label>
+                            <div class="col-md-8 col-sm-9 col-xs-12">
+                              <input name="keahlian" type="text" class="form-control" placeholder=" Contoh: Drama, Edit Video, Photoshop" value="<?= $key['keahlian']; ?>">
+                            </div>
+                          </div>
 
                         </div>
                       </div>
@@ -445,7 +451,6 @@
                               <textarea name="riw_pykt" type="text" class="form-control" placeholder=" Contoh: Diabetes Tipe 1, Demam Berdarah"><?= $key['pykt_derita']; ?></textarea>
                             </div>
                           </div>
-
                         </div>
                       </div>
                     </div>
@@ -726,6 +731,14 @@
                                     <div class="block_content">
                                       <h2 class="title" style="font-weight: bold;">Tugas Tambahan</h2>
                                       <p class="excerpt"><?= $key['tugas_tambahan']; ?></p>
+                                    </div>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="block">
+                                    <div class="block_content">
+                                      <h2 class="title" style="font-weight: bold;">Keahlian</h2>
+                                      <p class="excerpt"><?= $key['keahlian']; ?></p>
                                     </div>
                                   </div>
                                 </li>
@@ -1150,6 +1163,12 @@
                         <input name="tgs_tmbhn" type="text" class="form-control">
                       </div>
                     </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Keahlian</label>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <input name="keahlian" type="text" class="form-control" placeholder=" Contoh: Drama, Edit Video, Photoshop">
+                      </div>
+                    </div>
 
                   </div>
                 </div>
@@ -1253,6 +1272,7 @@
                         <textarea name="riw_pykt" type="text" class="form-control" placeholder=" Contoh: Diabetes Tipe 1, Demam Berdarah"></textarea>
                       </div>
                     </div>
+
 
                   </div>
                 </div>

@@ -66,24 +66,37 @@
             <form class="form-horizontal form-label-left" action="<?= base_url(); ?>dashboard/do_edit_mapel" method="post">
               <!-- modal body -->
               <div class="modal-body">
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Mata Pelajaran</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="kd_mapel" type="text" class="form-control" value="<?= $key['kd_mapel']; ?>" readonly>
+                  <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                          <li role="presentation" class="active"><a href="#tab_content1_edit" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Data 1</a>
+                          </li>
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                        <!-- tab panel ke 1 -->
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1_edit" aria-labelledby="home-tab">
+                            <div class="row">    
+                                <div class="form-group" style="padding-bottom:6%;">
+                                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Mata Pelajaran</label>
+                                  <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <input name="kd_mapel" type="text" class="form-control" value="<?= $key['kd_mapel']; ?>" readonly>
+                                  </div>
+                                </div>
+                                <div class="form-group" style="padding-bottom:6%;">
+                                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Nama Mata Pelajaran</label>
+                                  <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <input name="nm_mapel" type="text" class="form-control" value="<?= $key['nm_mapel']; ?>" required>
+                                  </div>
+                                </div>
+                                <div class="form-group" style="padding-bottom:6%;">
+                                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Standar Nilai</label>
+                                  <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <input name="kkm" type="text" class="form-control" value="<?= $key['kkm']; ?>" required>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Nama Mata Pelajaran</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="nm_mapel" type="text" class="form-control" value="<?= $key['nm_mapel']; ?>" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Standar Nilai</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="kkm" type="text" class="form-control" value="<?= $key['kkm']; ?>" required>
-                  </div>
-                </div>
               </div>
               <!-- modal footer -->
               <div class="modal-footer ">
@@ -174,7 +187,7 @@
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Standar Nilai</label>
             <div class="col-md-9 col-sm-9 col-xs-12">
-              <input name="kkm" type="number" class="form-control" required>
+              <input name="kkm" type="number" class="form-control" placeholder=" Contoh: 70" required>
             </div>
           </div>
         </div>

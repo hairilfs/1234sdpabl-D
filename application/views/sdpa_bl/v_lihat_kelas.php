@@ -66,23 +66,36 @@
             <form class="form-horizontal form-label-left" action="<?= base_url(); ?>dashboard/do_edit_kelas" method="post">
               <!-- modal body -->
               <div class="modal-body">
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Kelas</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="kd_kelas" type="text" class="form-control" value="<?= $key['kd_kelas']; ?>" readonly="">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Nama Kelas</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="nm_kelas" type="text" class="form-control" value="<?= $key['nm_kelas']; ?>" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Kapasitas</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="kapasitas" type="text" class="form-control" value="<?= $key['kapasitas']; ?>" required>
-                  </div>
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_content1_edit<?= $key['kd_kelas']; ?>" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Data 1</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <!-- tab panel ke 1 -->
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1_edit<?= $key['kd_kelas']; ?>" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="form-group" style="padding-bottom:6%;">
+                                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Kelas</label>
+                                  <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <input name="kd_kelas" type="text" class="form-control" value="<?= $key['kd_kelas']; ?>" readonly="">
+                                  </div>
+                                </div>
+                                <div class="form-group" style="padding-bottom:6%;">
+                                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Nama Kelas</label>
+                                  <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <input name="nm_kelas" type="text" class="form-control" value="<?= $key['nm_kelas']; ?>" required>
+                                  </div>
+                                </div>
+                                <div class="form-group" style="padding-bottom:6%;">
+                                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Kapasitas</label>
+                                  <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <input name="kapasitas" type="text" class="form-control" value="<?= $key['kapasitas']; ?>" required>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
               </div>
               <!-- modal footer -->

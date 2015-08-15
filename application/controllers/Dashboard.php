@@ -96,7 +96,9 @@ public function master_mapel() {
 public function master_peserta() {
 
   $data = $this->m_sdpa->get_data_peserta();
-  $this->template->load('vtemplate','sdpa_bl/v_lihat_peserta', array('isi' => $data));
+  $data2 = $this->m_sdpa->get_data_kelas();
+  $data3 = $this->m_sdpa->getSiswa();
+  $this->template->load('vtemplate','sdpa_bl/v_lihat_peserta', array('isi' => $data, 'isi2' => $data2, 'isi3' => $data3));
 
 }
 
@@ -104,7 +106,9 @@ public function master_jadwal() {
 
   $data = $this->m_sdpa->get_data_jadwal();
   $data2 = $this->m_sdpa->get_data_mapel();
-  $this->template->load('vtemplate','sdpa_bl/v_lihat_jadwal', array('isi' => $data, 'isi2' => $data2));
+  $data3 = $this->m_sdpa-> get_data_guru();
+  $data4 = $this->m_sdpa->get_data_kelas();
+  $this->template->load('vtemplate','sdpa_bl/v_lihat_jadwal', array('isi' => $data, 'isi2' => $data2, 'isi3' => $data3, 'isi4' => $data4));
 
 }
 
@@ -368,7 +372,8 @@ public function do_insert_guru() {
     'nama_ibu'          => $_POST['nm_ibu'],        'nama_suami'        => $_POST['nm_sm'],
     'nama_istri'        => $_POST['nm_is'],         'tinggi_badan'      => $_POST['tg_bdn'],
     'berat_badan'       => $_POST['brt_bdn'],       'wajah'             => $_POST['wajah'],
-    'rambut'            => $_POST['rambut'],        'pykt_derita'       => $_POST['riw_pykt']
+    'rambut'            => $_POST['rambut'],        'pykt_derita'       => $_POST['riw_pykt'],
+    'keahlian'          => $_POST['keahlian']
     );
 
   $res = $this->m_sdpa->insert_data_guru('guru', $data_insert);
@@ -423,7 +428,8 @@ public function do_edit_guru() {
     'nama_ibu'          => $_POST['nm_ibu'],        'nama_suami'        => $_POST['nm_sm'],
     'nama_istri'        => $_POST['nm_is'],         'tinggi_badan'      => $_POST['tg_bdn'],
     'berat_badan'       => $_POST['brt_bdn'],       'wajah'             => $_POST['wajah'],
-    'rambut'            => $_POST['rambut'],        'pykt_derita'       => $_POST['riw_pykt']
+    'rambut'            => $_POST['rambut'],        'pykt_derita'       => $_POST['riw_pykt'],
+    'keahlian'          => $_POST['keahlian']
     );
 
   $res = $this->m_sdpa->update_data_guru('guru', $data_update, array('employee_id' => $_POST['employee_id']) );
@@ -644,14 +650,14 @@ public function do_insert_peserta() {
     redirect("dashboard/master_peserta");
 }
 
-public function do_edit_peserta() {
+public function do_edit_peserta($kd_peserta) {
   $data_update= array(
     'nis'       => $_POST['nis'],
     'kd_kelas'  => $_POST['kd_kelas'],
     'thn_ajar'  => $_POST['thn_ajar']
     );
 
-  $res = $this->m_sdpa->update_data_peserta('peserta', $data_update, array('nis' => $_POST['nis']) );
+  $res = $this->m_sdpa->update_data_peserta('peserta', $data_update, array('kd_peserta' => $kd_peserta));
 
   if ($res >= 1) {
     $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -666,9 +672,9 @@ public function do_edit_peserta() {
     redirect("dashboard/master_peserta");
 }
 
-public function do_delete_peserta($nis)
+public function do_delete_peserta($kd_peserta)
   {
-    $res = $this->m_sdpa->delete_data_peserta('peserta', array('nis' => $nis));
+    $res = $this->m_sdpa->delete_data_peserta('peserta', array('kd_peserta' => $kd_peserta));
 
     if ($res >= 1) {
       $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -755,42 +761,6 @@ public function do_delete_jadwal($kd_jadwal)
       redirect("dashboard/master_jadwal");
   }
 
-// function do_upload()
-// {
-//   if($this->input->post('upload'))
-//   {
-//     $config['upload_path'] = './uploads/';
-//     $config['allowed_types'] = 'gif|jpg|png';
-//     $config['max_size']    = '1024';
-//     $config['max_width']  = '1024';
-//     $config['max_height']  = '768';
-//     $this->load->library('upload', $config);
-//     if ( ! $this->upload->do_upload())
-//     {
-//       $error = array('error' => $this->upload->display_errors());
-//       $this->load->view('upload_form', $error);
-//     }
-//     else
-//     {
-//       $data=$this->upload->data();
-//       $this->thumb($data);
-//       $file=array(
-//         'img_name'=>$data['raw_name'],
-//         'thumb_name'=>$data['raw_name'].'_thumb',
-//         'ext'=>$data['file_ext'],
-//         'upload_date'=>time()
-//         );
-//       $this->upload_model->add_image($file);
-//       $data = array('upload_data' => $this->upload->data());
-//       $this->load->view('upload_success', $data);
-//     }
-//   }
-//   else
-//   {
-//     redirect(site_url('upload'));
-//   }
-// }
-
 public function addData() {
 
   echo "<h2>Tambah data</h2>";
@@ -817,14 +787,14 @@ public function master_walikelas() {
     $data = $this->m_sdpa->getWalikelas();
     $data2  = $this->m_sdpa->getUser("where a.employee_id not in (select b.Employee_id from walikelas b)");
     $data3 = $this->m_sdpa->get_data_kelas();
-    $this->template->load('vtemplate','sdpa_bl/v_lihat_walikelas', array('isi' => $data, 'isi2' => $data2, 'isi3' => $data3));
+    $data4 = $this->m_sdpa-> get_data_guru();
+    $this->template->load('vtemplate','sdpa_bl/v_lihat_walikelas', array('isi' => $data, 'isi2' => $data2, 'isi3' => $data3, 'isi4' => $data4));
 
 }
 
 public function do_insert_walikelas() {
     $tahun_ajar_wali= $_POST['tahun_ajar_wali'];
     $employee_id    = $_POST['employee_id'];
-    $nip  = $_POST['nip'];
     $kd_kelas       = $_POST['kd_kelas'];
 
     $a= "N";
@@ -838,7 +808,6 @@ public function do_insert_walikelas() {
     $data_insert= array(
         'Tahun_ajar_wali'   => $tahun_ajar_wali,  
         'Employee_id'       => $employee_id,
-        'NIP'  => $nip,
         'Kd_kelas'          => $kd_kelas
     );
 

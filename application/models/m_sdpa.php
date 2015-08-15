@@ -351,11 +351,6 @@ class M_sdpa extends CI_Model {
 	//DATA Jadwal Guru
 
 	public function get_data_jadwal_guru($where = "", $asd="") {
-		// $this->db->select('*');    
-		// $this->db->from('jadwal');
-		// $this->db->join('guru', 'jadwal.employee_id = guru.employee_id');
-		// $this->db->where('guru.employee_id', $asd);
-		// $data = $this->db->get();
 		$data = $this->db->query("select b.nama_guru, d.nm_kelas, c.nm_mapel, a.hari, a.ruang, a.semester, a.thn_ajar, a.kd_jadwal from jadwal a, guru b, mapel c, kelas d ".$where);
 
 		return $data->result_array();
@@ -409,6 +404,14 @@ class M_sdpa extends CI_Model {
 	public function getWalikelasDataSiswa($where = "") {
 
 		$data = $this->db->query('select * from guru a, kelas b, siswa c, peserta d, walikelas e '.$where);
+
+		return $data->result_array();
+
+	}
+
+	public function KelasSiswaPeserta($where = "") {
+
+		$data = $this->db->query('select * from kelas a, siswa b, peserta c '.$where);
 
 		return $data->result_array();
 

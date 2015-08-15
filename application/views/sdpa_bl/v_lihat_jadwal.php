@@ -74,63 +74,108 @@
             </div>
             <form class="form-horizontal form-label-left" action="<?= base_url(); ?>dashboard/do_edit_jadwal" method="post" enctype="multipart/form-data">
               <div class="modal-body">
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Jadwal</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="kd_jadwal" type="text" class="form-control" value="<?= $key['kd_jadwal']; ?>" readonly>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Tahun Ajar</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="thn_ajar" type="text" class="form-control" value="<?= $key['thn_ajar']; ?>" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Hari</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <select name="semester" class="form-control" >
-                      <option value="Gasal"<?php if ($key['hari']=="Gasal")  echo " selected";?>>Gasal</option>
-                      <option value="Genap"<?php if ($key['hari']=="Genap")  echo " selected";?>>Genap</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Mapel</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="kd_mapel" type="text" class="form-control" value="<?= $key['kd_mapel']; ?>" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Emp. ID</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="employee_id" type="text" class="form-control" value="<?= $key['employee_id']; ?>" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Kelas</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="kd_kelas" type="text" class="form-control" value="<?= $key['kd_kelas']; ?>" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Hari</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <select name="hari" class="form-control" >
-                      <option value="Senin"<?php if ($key['hari']=="Senin")  echo " selected";?>>Senin</option>
-                      <option value="Selasa"<?php if ($key['hari']=="Selasa")  echo " selected";?>>Selasa</option>
-                      <option value="Rabu"<?php if ($key['hari']=="Rabu")  echo " selected";?>>Rabu</option>
-                      <option value="Kamis"<?php if ($key['hari']=="Kamis")  echo " selected";?>>Kamis</option>
-                      <option value="Jum'at"<?php if ($key['hari']=="Jum'at")  echo " selected";?>>Jum'at</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-4 col-sm-3 col-xs-12">Ruang</label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                    <input name="ruang" type="text" class="form-control" value="<?= $key['ruang']; ?>"required>
-                  </div>
-                </div>
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#tab_content1_edit" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Data 1</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                          <!-- tab panel ke 1 -->
+                          <div role="tabpanel" class="tab-pane fade active in" id="tab_content1_edit" aria-labelledby="home-tab">
+                              <div class="row">    
+                                  <div class="form-group" style="padding-bottom:6%;">
+                                    <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Jadwal</label>
+                                    <div class="col-md-8 col-sm-9 col-xs-12">
+                                      <input name="kd_jadwal" type="text" class="form-control" value="<?= $key['kd_jadwal']; ?>" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="padding-bottom:6%;">
+                                    <label class="control-label col-md-4 col-sm-3 col-xs-12">Tahun Ajar</label>
+                                    <div class="col-md-8 col-sm-9 col-xs-12">
+                                      <select name="thn_ajar" class="form-control" value="<?= $key['thn_ajar']; ?>">
+                                              <?php
+                                                  for ($i=2010; $i<=2020 ; $i++) { $b = $i+1; $a = $i."/".$b;
+                                              ?>
+                                                  <option value="<?= $a; ?>" <?php if ($key['thn_ajar']== $a) echo "selected";?>><?= $a; ?></option>
+                                              <?php
+                                                  }
+                                              ?>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="padding-bottom:6%;">
+                                    <label class="control-label col-md-4 col-sm-3 col-xs-12">Semester</label>
+                                    <div class="col-md-8 col-sm-9 col-xs-12">
+                                      <select name="semester" class="form-control" >
+                                        <option value="Gasal"<?php if ($key['semester']=="Gasal")  echo " selected";?>>Gasal</option>
+                                        <option value="Genap"<?php if ($key['semester']=="Genap")  echo " selected";?>>Genap</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="padding-bottom:6%;">
+                                    <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Mapel</label>
+                                    <div class="col-md-8 col-sm-9 col-xs-12">
+                                      <select name="kd_mapel"  class="select2_single form-control">
+                                          <?php foreach ($isi2 as $key2): ?>
+                                            <option value="<?= $key2['kd_mapel'];?>" <?php if($key2['kd_mapel']==$key['kd_mapel']) echo "selected"; ?>><?= $key2['kd_mapel'].' - '.$key2['nm_mapel'];?></option>
+                                          <?php endforeach; ?>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="padding-bottom:6%;">
+                                    <label class="control-label col-md-4 col-sm-3 col-xs-12">Emp. ID</label>
+                                    <div class="col-md-8 col-sm-9 col-xs-12">
+                                      <select name="employee_id" class="form-control">
+                                          <?php
+
+                                              foreach ($isi3 as $key3) { 
+                                          ?>
+                                                  <option value="<?= $key3['employee_id'] ?>" <?php if($key3['employee_id'] == $key['employee_id']) echo "selected"; ?>><?= $key3['employee_id']?> - <?= $key3['nama_guru']?></option>
+                                          <?php
+                                              }
+                                          ?>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="padding-bottom:6%;">
+                                    <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Kelas</label>
+                                    <div class="col-md-8 col-sm-9 col-xs-12">
+                                      <select name="kd_kelas" class="form-control">
+                                          <option>Pilih Kode Kelas</option>
+
+                                          <?php
+
+                                              foreach ($isi4 as $key4) { 
+                                          ?>
+                                                  <option value="<?= $key4['kd_kelas'] ?>" <?php if($key4['kd_kelas'] == $key['kd_kelas']) echo "selected"; ?>><?= $key4['kd_kelas']?> - <?= $key4['nm_kelas']?></option>
+                                          <?php
+                                              }
+                                          ?>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="padding-bottom:6%;">
+                                    <label class="control-label col-md-4 col-sm-3 col-xs-12">Hari</label>
+                                    <div class="col-md-8 col-sm-9 col-xs-12">
+                                      <select name="hari" class="form-control" >
+                                        <option value="Senin"<?php if ($key['hari']=="Senin")  echo " selected";?>>Senin</option>
+                                        <option value="Selasa"<?php if ($key['hari']=="Selasa")  echo " selected";?>>Selasa</option>
+                                        <option value="Rabu"<?php if ($key['hari']=="Rabu")  echo " selected";?>>Rabu</option>
+                                        <option value="Kamis"<?php if ($key['hari']=="Kamis")  echo " selected";?>>Kamis</option>
+                                        <option value="Jum'at"<?php if ($key['hari']=="Jum'at")  echo " selected";?>>Jum'at</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group" style="padding-bottom:6%;">
+                                    <label class="control-label col-md-4 col-sm-3 col-xs-12">Ruang</label>
+                                    <div class="col-md-8 col-sm-9 col-xs-12">
+                                      <input name="ruang" type="text" class="form-control" value="<?= $key['ruang']; ?>"required>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
@@ -182,7 +227,15 @@
                     <div class="block">
                       <div class="block_content">
                         <h2 class="title" style="font-weight: bold;">Kode Mapel</h2>
-                        <p class="excerpt"><?= $key['kd_mapel']; ?></p>
+                        <?php 
+                            foreach ($isi2 as $key2){ 
+                                if($key2['kd_mapel']==$key['kd_mapel']){ 
+                        ?>
+                                    <p class="excerpt"><?= $key['kd_mapel'].' - '.$key2['nm_mapel'];?></p>
+                        <?php 
+                                }
+                            } 
+                        ?>
                       </div>
                     </div>
                   </li>
@@ -190,7 +243,15 @@
                     <div class="block">
                       <div class="block_content">
                         <h2 class="title" style="font-weight: bold;">Emp. ID</h2>
-                        <p class="excerpt"><?= $key['employee_id']; ?></p>
+                        <?php 
+                            foreach ($isi3 as $key3){ 
+                                if($key3['employee_id'] == $key['employee_id']){ 
+                        ?>
+                                    <p class="excerpt"><?= $key['employee_id'].' - '.$key3['nama_guru'];?></p>
+                        <?php 
+                                }
+                            } 
+                        ?>
                       </div>
                     </div>
                   </li>
@@ -198,7 +259,15 @@
                     <div class="block">
                       <div class="block_content">
                         <h2 class="title" style="font-weight: bold;">Kode Kelas</h2>
-                        <p class="excerpt"><?= $key['kd_kelas']; ?></p>
+                        <?php 
+                            foreach ($isi4 as $key4){ 
+                                if($key4['kd_kelas'] == $key['kd_kelas']){ 
+                        ?>
+                                    <p class="excerpt"><?= $key['kd_kelas'].' - '.$key4['nm_kelas'];?></p>
+                        <?php 
+                                }
+                            } 
+                        ?>
                       </div>
                     </div>
                   </li>
@@ -254,13 +323,24 @@
           <div class="form-group">
             <label class="control-label col-md-4 col-sm-3 col-xs-12">Tahun Ajar</label>
             <div class="col-md-8 col-sm-9 col-xs-12">
-              <input name="thn_ajar" type="text" class="form-control">
+              <select name="thn_ajar" class="form-control">
+                  <option>Pilih Tahun Ajar</option>
+
+                  <?php
+                      for ($i=2010; $i<=2020 ; $i++) { 
+                  ?>
+                      <option value="<?= $i; ?>/<?= $i+1; ?>"><?= $i; ?>/<?= $i+1; ?></option>
+                  <?php
+                      }
+                  ?>
+              </select>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-4 col-sm-3 col-xs-12">Semester</label>
             <div class="col-md-8 col-sm-9 col-xs-12">
               <select name="semester" class="form-control" >
+                <option>Pilih Semester</option>
                 <option value="Gasal">Gasal</option>
                 <option value="Genap">Genap</option>
               </select>
@@ -270,29 +350,52 @@
             <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Mapel</label>
             <div class="col-md-8 col-sm-9 col-xs-12">
               <select name="kd_mapel"  class="select2_single form-control" >
+              <option>Pilih Kode Mapel</option>
               <?php foreach ($isi2 as $key2): ?>
-                <option value="<?= $key2['kd_mapel'];?>"><?= $key2['nm_mapel'].' - '.$key2['kd_mapel'];?></option>
+                <option value="<?= $key2['kd_mapel'];?>"><?= $key2['kd_mapel'].' - '.$key2['nm_mapel'];?></option>
               <?php endforeach; ?>
               </select>
-              <!-- <input name="kd_mapel" type="text" class="form-control"> -->
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-4 col-sm-3 col-xs-12">Emp. ID</label>
             <div class="col-md-8 col-sm-9 col-xs-12">
-              <input name="employee_id" type="text" class="form-control">
+              <select name="employee_id" class="form-control">
+                  <option>Pilih Employee ID</option>
+
+                  <?php
+
+                      foreach ($isi3 as $key3) { 
+                  ?>
+                          <option value="<?= $key3['employee_id'] ?>"><?= $key3['employee_id']?> - <?= $key3['nama_guru']?></option>
+                  <?php
+                      }
+                  ?>
+              </select>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Kelas</label>
             <div class="col-md-8 col-sm-9 col-xs-12">
-              <input name="kd_kelas" type="text" class="form-control">
+              <select name="kd_kelas" class="form-control">
+                  <option>Pilih Kode Kelas</option>
+
+                  <?php
+
+                      foreach ($isi4 as $key4) { 
+                  ?>
+                          <option value="<?= $key4['kd_kelas'] ?>"><?= $key4['kd_kelas']?> - <?= $key4['nm_kelas']?></option>
+                  <?php
+                      }
+                  ?>
+              </select>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-4 col-sm-3 col-xs-12">Hari</label>
             <div class="col-md-8 col-sm-9 col-xs-12">
               <select name="hari" class="form-control" >
+                <option>Pilih Hari</option>
                 <option value="Senin">Senin</option>
                 <option value="Selasa">Selasa</option>
                 <option value="Rabu">Rabu</option>

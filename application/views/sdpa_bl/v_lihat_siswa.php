@@ -137,7 +137,6 @@
                                                     
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="agama" class="form-control"  value="<?= $key['Agama']; ?>">
-                                                            <option>Pilih Agama</option>
                                                             <option value="Islam" <?php if($key['Agama'] == 'Islam') echo 'selected="selected"'; ?>>Islam</option>
                                                             <option value="Kristen" <?php if($key['Agama'] == 'Kristen') echo 'selected="selected"'; ?>>Kristen Protestan</option>
                                                             <option value="Katolik" <?php if($key['Agama'] == 'Katolik') echo 'selected="selected"'; ?>>Kristen Katolik</option>
@@ -154,7 +153,6 @@
                                                     
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="jenis_kelamin" class="form-control" >
-                                                            <option>Pilih Jenis Kelamin</option>
                                                             <option value="Laki-Laki" <?php if($key['Jenis_kelamin'] == 'Laki-Laki') echo 'selected="selected"'; ?>>Laki-Laki</option>
                                                             <option value="Perempuan" <?php if($key['Jenis_kelamin'] == 'Perempuan') echo 'selected="selected"'; ?>>Perempuan</option>
                                                         </select>
@@ -200,7 +198,6 @@
                                                     
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="warga_negara" class="form-control" >
-                                                            <option>Pilih Warga Negara</option>
                                                             <option value="WNI" <?php if($key['Warga_negara'] == 'WNI') echo 'selected="selected"'; ?>>Warga Negara Indonesia (WNI)</option>
                                                             <option value="WNA" <?php if($key['Warga_negara'] == 'WNA') echo 'selected="selected"'; ?>>Warga Negara Asing (WNA)</option>
                                                         </select>
@@ -212,7 +209,6 @@
                                                     
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="status_anak" class="form-control" >
-                                                            <option>Pilih Status Anak</option>
                                                             <option value="Kandung" <?php if($key['Status_anak'] == 'Kandung') echo 'selected="selected"'; ?>>Kandung</option>
                                                             <option value="Angkat" <?php if($key['Status_anak'] == 'Angkat') echo 'selected="selected"'; ?>>Angkat</option>
                                                         </select>
@@ -271,7 +267,6 @@
                                                     
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="golongan_darah" class="form-control" >
-                                                            <option>Pilih Golongan Darah</option>
                                                             <option value="A" <?php if($key['Golongan_darah'] == 'A') echo 'selected="selected"'; ?>>A</option>
                                                             <option value="B" <?php if($key['Golongan_darah'] == 'B') echo 'selected="selected"'; ?>>B</option>
                                                             <option value="AB" <?php if($key['Golongan_darah'] == 'AB') echo 'selected="selected"'; ?>>AB</option>

@@ -10,7 +10,6 @@
             <th style="text-align:center">No. </th>
             <th style="text-align:center">Tahun Ajar Wali </th>
             <th style="text-align:center">Employee ID </th>
-            <th style="text-align:center">NIP </th>
             <th style="text-align:center">Kode Kelas </th>
 
             <th class="no-link last" style='text-align:center;'>
@@ -32,9 +31,8 @@
 
             <td style="text-align:center"><?= $no++ ?></td>
             <td style="text-align:center"><?= $key['Tahun_ajar_wali']; ?></td>
-            <td style="text-align:center"><?= $key['Employee_id']; ?></td>
-            <td style="text-align:center"><?= $key['NIP']; ?></td>
-            <td style="text-align:center"><?= $key['Kd_kelas']; ?></td>
+            <td style="text-align:center"><?= $key['Employee_id']; ?> - <?php foreach ($isi4 as $key_isi4) { if($key['Employee_id'] == $key_isi4['employee_id']) { echo $key_isi4['nama_guru'];}} ?></td>
+            <td style="text-align:center"><?= $key['Kd_kelas']; ?> - <?php foreach ($isi3 as $key_isi3) { if($key['Kd_kelas'] == $key_isi3['kd_kelas']) { echo $key_isi3['nm_kelas'];}} ?></td>
 
             <td align="center">
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit-wakel<?= $key['Kd_walikelas']; ?>"><i class="fa fa-edit"></i> Edit</button>
@@ -104,7 +102,16 @@
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Tahun Ajar</label>
                                                         
                                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="tahun_ajar_wali" type="text" class="form-control" value="<?= $key['Tahun_ajar_wali']; ?>">
+                                                            <select name="tahun_ajar_wali" class="form-control" value="<?= $key['Tahun_ajar_wali']; ?>">
+                                                                <option>Pilih Tahun Ajar</option>
+                                                                    <?php
+                                                                        for ($i=2010; $i<=2020 ; $i++) { $b = $i+1; $a = $i."/".$b;
+                                                                    ?>
+                                                                        <option value="<?= $a; ?>" <?php if ($key['Tahun_ajar_wali']== $a) echo "selected";?>><?= $a; ?></option>
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                            </select>
                                                         </div>
                                                     </div>
 
@@ -112,25 +119,40 @@
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee ID</label>
                                                         
                                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="employee_id" type="text" class="form-control" value="<?= $key['Employee_id']; ?>">
+                                                            <select name="employee_id" class="form-control">
+                                                                <option>Pilih Employee ID</option>
+
+                                                                <?php
+
+                                                                    foreach ($isi2 as $key2) { 
+                                                                ?>
+                                                                        <option value="<?= $key2['employee_id'] ?>"><?= $key2['employee_id']?> - <?= $key2['nama_guru']?></option>
+                                                                <?php
+                                                                    }
+                                                                ?>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="form-group" style="padding-bottom:8%;">
-                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">NIP</label>
-                                                        
-                                                        <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="nip" type="text" class="form-control" value="<?= $key['NIP']; ?>">
-                                                        </div>
-                                                    </div>
 
                                                     <div class="form-group" style="padding-bottom:8%;">
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Kode Kelas</label>
                                                         
                                                         <div class="col-md-9 col-sm-9 col-xs-12">
-                                                            <input name="kd_kelas" type="text" class="form-control" value="<?= $key['Kd_kelas']; ?>">
+                                                            <select name="kd_kelas" class="form-control" value="<?= $key['Kd_kelas']; ?>">
+                                                                <option>Pilih Kelas</option>
+
+                                                                <?php
+
+                                                                    foreach ($isi3 as $key3) { 
+                                                                ?>
+                                                                        <option value="<?= $key3['kd_kelas'] ?>" <?php if ($key3['kd_kelas']==$key['Kd_kelas'])  echo " selected";?>><?= $key3['kd_kelas'] ?> - <?= $key3['nm_kelas'] ?></option>
+                                                                <?php
+                                                                    }
+                                                                ?>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -223,24 +245,6 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">NIP</label>
-                                            
-                                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                                <select name="nip" class="form-control">
-                                                    <option>Pilih NIP</option>
-
-                                                    <?php
-
-                                                        foreach ($isi2 as $key2) { 
-                                                    ?>
-                                                            <option value="<?= $key2['NIP'] ?>"><?= $key2['NIP']?> - <?= $key2['employee_id']?> - <?= $key2['nama_guru']?></option>
-                                                    <?php
-                                                        }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Kode Kelas</label>

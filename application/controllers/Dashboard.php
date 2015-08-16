@@ -150,34 +150,37 @@ public function tahun_wali() {
 
 public function report_siswa() {
   // if(isset($kelas) AND isset($jadwal)) {
-    $kd_jdw_now   = "";
-    $tahun        = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ;
-    $semester     = isset($_POST['semester']) ? $_POST['semester'] : '' ;
+    $kd_jdw_now   = ""; // ok
+    $tahun        = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ; // ok
+    $semester     = isset($_POST['semester']) ? $_POST['semester'] : '' ; // ok
     $asd          = $this->session->userdata('u_id');
     $data_guru    = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
     $data_walkel  = $this->m_sdpa->getWalikelas("where Employee_id='$asd' ");
     foreach ($data_walkel as $key_walkel) {
       if ($key_walkel['Employee_id']==$asd) {
-        $kelas = $key_walkel['Kd_kelas'];
+        $kelas = $key_walkel['Kd_kelas']; // ok
       }
     }
     $data_peserta = $this->m_sdpa->get_data_peserta("where kd_kelas = '$kelas' ");
-    $data_jadwal  = $this->m_sdpa->get_data_jadwal("where thn_ajar='$tahun' and semester='$semester' and employee_id='$asd' ");
+    $data_jadwal  = $this->m_sdpa->get_data_jadwal("where thn_ajar='$tahun' and semester='$semester' and kd_kelas='$kelas' ");
     foreach ($data_jadwal as $key_jadwal) {
-      if ($key_jadwal['employee_id']==$asd && $key_jadwal['thn_ajar']==$tahun && $key_jadwal['semester']==$semester) {
-        $kd_jdw_now = "'".$key_jadwal['kd_jadwal']."'";
+      if ($key_jadwal['kd_kelas']==$kelas && $key_jadwal['thn_ajar']==$tahun && $key_jadwal['semester']==$semester) {
+        $kd_jdw_now = "'".$key_jadwal['kd_jadwal']."'"; // belum bisa ambil banyak jadwal
       }
     }
     $data_mapel   = $this->m_sdpa->get_data_mapel();
     $data_siswa   = $this->m_sdpa->get_data_siswa();
-    $data_latihan = $this->m_sdpa->get_data_latihan("where kd_jadwal in () ");
-    $data_kuis    = $this->m_sdpa->get_data_kuis();
-    $data_uas     = $this->m_sdpa->get_data_uas();
-    $data_uts     = $this->m_sdpa->get_data_uts();
+    $data_latihan = $this->m_sdpa->get_data_latihan("where kd_jadwal in ($kd_jdw_now) order by kd_lat");
+    $data_kuis    = $this->m_sdpa->get_data_kuis("where kd_jadwal in ($kd_jdw_now) order by kd_kuis");
+    $data_uas     = $this->m_sdpa->get_data_uas("where kd_jadwal in ($kd_jdw_now) order by kd_uas");
+    $data_uts     = $this->m_sdpa->get_data_uts("where kd_jadwal in ($kd_jdw_now) order by kd_uts");
 
-    $this->template->load('vtemplate_guru','sdpa_bl/v_report_siswa', array('data_latihan' => $data_latihan, 'a'=> $jadwal, 'isi' => $data_guru,
-    'isi_peserta' => $data_peserta, 'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas, 'data_uts' => $data_uts,
-    'data_jadwal' => $data_jadwal, 'data_mapel' => $data_mapel, 'isi2' => $data_guru));
+    $this->template->load('vtemplate_guru','sdpa_bl/v_report_siswa', array(
+      'data_latihan' => $data_latihan, 'isi' => $data_guru, 'isi_peserta' => $data_peserta,
+      'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas,
+      'data_uts' => $data_uts, 'data_jadwal' => $data_jadwal, 'data_mapel' => $data_mapel,
+      'cekw' => $kelas." - ".$semester." - ".$tahun
+    ));
   // } else {
   //   redirect("dashboard");
   // }
@@ -449,7 +452,7 @@ public function do_edit_guru() {
 
   /*$employee_id = $_POST['employee_id'];
   $data = $this->m_sdpa->get_data_guru("where employee_id='$employee_id'");
-  
+
 
   if($_FILES['fotox']['size']!=0) {
       $foto = base_url()."assets/uploads/".$gbr['file_name'];
@@ -501,7 +504,7 @@ public function do_edit_guru() {
     'no_sk_dinas'       => $_POST['no_sk_dns'],     'tgl_sk_dinas'      => $_POST['tgl_sk_dns'],
     'bdg_studi_ajar'    => $_POST['b_studi_ajar'],  'mutasi_dari'       => $_POST['mutasi_dari'],
     'no_sk_mutasi'      => $_POST['no_sk_mutasi'],  'stat_karyawan'     => $_POST['stat_kar'],
-    'gol_darah'         => $_POST['gol_dar'],       
+    'gol_darah'         => $_POST['gol_dar'],
     'tempat_bekerja'    => $_POST['tmpt_krj'],      'jabatan'           => $_POST['jbtn'],
     'pangkat_golongan'  => $_POST['pgkt_gol'],      'stat_pegawai'      => $_POST['stat_pegawai'],
     'mengajar_dikelas'  => $_POST['mgjr_kls'],      'tugas_tambahan'    => $_POST['tgs_tmbhn'],

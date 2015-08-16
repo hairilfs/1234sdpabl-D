@@ -1,5 +1,5 @@
 <div class="x_title">
-  <h2>Laporan Nilai Siswa</h2>
+  <h2>Laporan Nilai Siswa - <?php echo $cekw ?></h2>
   <div class="clearfix"></div>
 </div>
 <div class="dashboard-widget-content">
@@ -43,17 +43,18 @@
                             $cek_isi_lat = isset($key_data_latihan['kd_lat']) ? $key_data_latihan['kd_lat'] : '';
                             $kode = "LT000";
                             $kodeurut = $kode.$urut;
-                            if($key_data_latihan['kd_lat']==$kodeurut AND $last==$key_data_latihan['kd_jadwal']) {
+                            if($key_data_latihan['kd_lat']==$kodeurut) {
                               echo "<th>Latihan ".$urut++."</th>";
                             }
                           }
 
                           $urut2 = 1;
+                          // print_r($data_kuis);
                           foreach ($data_kuis as $key_data_kuis) {
                             $cek_isi_kuis = isset($key_data_kuis['kd_kuis']) ? $key_data_kuis['kd_kuis'] : '';
                             $kode2 = "QZ000";
                             $kodeurut2 = $kode2.$urut2;
-                            if($key_data_kuis['kd_kuis']==$kodeurut2 AND $last==$key_data_kuis['kd_jadwal']) {
+                            if($key_data_kuis['kd_kuis']==$kodeurut2) {
                               echo "<th>Kuis ".$urut2++."</th>";
                             }
                           }
@@ -63,7 +64,7 @@
                             $cek_isi_uts = isset($key_data_uts['kd_uts']) ? $key_data_uts['kd_uts'] : '';
                             $kode4 = "UT000";
                             $kodeurut4 = $kode4.$urut4;
-                            if($key_data_uts['kd_uts']==$kodeurut4 AND $last==$key_data_uts['kd_jadwal']) {
+                            if($key_data_uts['kd_uts']==$kodeurut4) {
                               echo "<th>UTS ".$urut4++."</th>";
                             }
                           }
@@ -73,7 +74,7 @@
                             $cek_isi_uas = isset($key_data_uas['kd_uas']) ? $key_data_uas['kd_uas'] : '';
                             $kode3 = "UA000";
                             $kodeurut3 = $kode3.$urut3;
-                            if($key_data_uas['kd_uas']==$kodeurut3 AND $last==$key_data_uas['kd_jadwal']) {
+                            if($key_data_uas['kd_uas']==$kodeurut3) {
                               echo "<th>UAS ".$urut3++."</th>";
                             }
                           }
@@ -99,7 +100,7 @@
                             foreach ($data_latihan as $key_data_latihan) {
                               $kode = "LT000";
                               $kodeurut = $kode.$urut;
-                              if($key_data_latihan['kd_lat']==$kodeurut AND $key_peserta['nis']==$key_data_latihan['nis'] AND $key_data_latihan['kd_jadwal']==$last) {
+                              if($key_data_latihan['kd_lat']==$kodeurut AND $key_peserta['nis']==$key_data_latihan['nis']) {
                                 $rol = isset($key_data_latihan['nilai']) ? $key_data_latihan['nilai'] : '0';
                                 echo "<td>".$rol."</td>";
                                 $urut++;
@@ -110,7 +111,7 @@
                             foreach ($data_kuis as $key_data_kuis) {
                               $kode2 = "QZ000";
                               $kodeurut2 = $kode2.$urut2;
-                              if($key_data_kuis['kd_kuis']==$kodeurut2 AND $key_peserta['nis']==$key_data_kuis['nis'] AND $key_data_kuis['kd_jadwal']==$last) {
+                              if($key_data_kuis['kd_kuis']==$kodeurut2 AND $key_peserta['nis']==$key_data_kuis['nis']) {
                                 $rol2 = isset($key_data_kuis['nilai']) ? $key_data_kuis['nilai'] : '0';
                                 echo "<td>".$rol2."</td>";
                                 $urut2++;
@@ -121,7 +122,7 @@
                             foreach ($data_uts as $key_data_uts) {
                               $kode4 = "UT000";
                               $kodeurut4 = $kode4.$urut4;
-                              if($key_data_uts['kd_uts']==$kodeurut4 AND $key_peserta['nis']==$key_data_uts['nis'] AND $key_data_uts['kd_jadwal']==$last) {
+                              if($key_data_uts['kd_uts']==$kodeurut4 AND $key_peserta['nis']==$key_data_uts['nis']) {
                                 $rol4 = isset($key_data_uts['nilai']) ? $key_data_uts['nilai'] : '0';
                                 echo "<td>".$rol4."</td>";
                                 $urut4++;
@@ -132,7 +133,7 @@
                             foreach ($data_uas as $key_data_uas) {
                               $kode3 = "UA000";
                               $kodeurut3 = $kode3.$urut3;
-                              if($key_data_uas['kd_uas']==$kodeurut3 AND $key_peserta['nis']==$key_data_uas['nis'] AND $key_data_uas['kd_jadwal']==$last) {
+                              if($key_data_uas['kd_uas']==$kodeurut3 AND $key_peserta['nis']==$key_data_uas['nis']) {
                                 $rol3 = isset($key_data_uas['nilai']) ? $key_data_uas['nilai'] : '0';
                                 echo "<td>".$rol3."</td>";
                                 $urut3++;
@@ -148,13 +149,11 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                  <button type="submit" class="btn btn-success" name="save">Simpan</button>
+                  <button type="submit" class="btn btn-success" data-dismiss="modal">OK</button>
                 </div>
               </div>
             </div>
           </div>
-
 
           <?php  }
         }

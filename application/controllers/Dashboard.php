@@ -209,7 +209,7 @@ public function master_nilai($semester,$kelas,$jadwal) {
     $data_latihan = $this->m_sdpa->get_data_latihan();
     $data_kuis = $this->m_sdpa->get_data_kuis();
     $data_uas = $this->m_sdpa->get_data_uas();
-    $data_uts = $this->m_sdpa->get_data_uts();
+    $data_uts = $this->m_sdpa->get_data_uts("where kd_jadwal='$jadwal' ");
     $data2 = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
 
     $this->template->load('vtemplate_guru','sdpa_bl/v_data_nilai', array('data_latihan' => $data_latihan, 'a'=> $jadwal, 'isi' => $data_guru,

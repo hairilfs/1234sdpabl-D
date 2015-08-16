@@ -3,7 +3,7 @@
   <div class="clearfix"></div>
 </div>
 
-<table class="table table-bordered table-hover table-compact">
+<table id="example" class="table table-striped responsive-utilities jambo_table">
 	<thead>
 		<tr>
 			<th>No.</th>

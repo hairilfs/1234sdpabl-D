@@ -42,8 +42,15 @@ $sem = $this->uri->segment(3);
           $cek_isi_lat = isset($key_data_latihan['kd_lat']) ? $key_data_latihan['kd_lat'] : '';
           $kode = "LT000";
           $kodeurut = $kode.$urut;
+
+          foreach ($data_ket_latihan as $key_data_ket_latihan) {
+            if($key_data_ket_latihan['kd_ket_latihan']==$kodeurut) {
+                $tooltip_ket_lat = $key_data_ket_latihan['keterangan_latihan'];
+            }
+          }
+           
           if($key_data_latihan['kd_lat']==$kodeurut AND $last==$key_data_latihan['kd_jadwal']) {
-            echo "<th>Latihan ".$urut++."</th>";
+            echo "<th>Latihan ".$urut++." <a href='javascript:;'><i class='fa fa-question-circle fa-lg' data-toggle='tooltip' data-placement='top' title='$tooltip_ket_lat'></i></a></th>";
           }
         }
 
@@ -52,8 +59,16 @@ $sem = $this->uri->segment(3);
           $cek_isi_kuis = isset($key_data_kuis['kd_kuis']) ? $key_data_kuis['kd_kuis'] : '';
           $kode2 = "QZ000";
           $kodeurut2 = $kode2.$urut2;
+
+          foreach ($data_ket_kuis as $key_data_ket_kuis) {
+            if($key_data_ket_kuis['kd_ket_kuis']==$kodeurut2) {
+                //$tooltip_ket_kuis = $key_data_ket_kuis['keterangan_kuis'];
+                $tooltip_ket_kuis = $key_data_ket_kuis['keterangan_kuis'];
+            }
+          }
+
           if($key_data_kuis['kd_kuis']==$kodeurut2 AND $last==$key_data_kuis['kd_jadwal']) {
-            echo "<th>Kuis ".$urut2++."</th>";
+            echo "<th>Kuis ".$urut2++." <a href='javascript:;'><i class='fa fa-question-circle fa-lg' data-toggle='tooltip' data-placement='top' title='$tooltip_ket_kuis'></i></a></th>";
           }
         }
 
@@ -157,6 +172,7 @@ $sem = $this->uri->segment(3);
       </div>
       <form class="" action="<?= base_url().'dashboard/isi_latihan/'.$sem.'/'.$key_peserta['kd_kelas'].'/'.$last; ?>" method="post">
         <div class="modal-body">
+          <div style="padding-bottom:7%;"><input type="text" name="keterangan" class="form-control col-md-7 col-xs-12" placeholder=" Keterangan..."></div>
           <table class="table table-bordered table-hover table-compact">
             <thead>
               <tr>
@@ -180,7 +196,7 @@ $sem = $this->uri->segment(3);
                     }
                   }
                   ?>
-                  <td><input type="number" name="<?= $key_peserta['nis'];?>" value="0"></td>
+                  <td><input type="number" name="<?= $key_peserta['nis'];?>" value="0" class="form-control"></td>
                 </tr>
                 <?php
               }
@@ -208,6 +224,7 @@ $sem = $this->uri->segment(3);
       </div>
       <form class="" action="<?= base_url().'dashboard/isi_kuis/'.$sem.'/'.$key_peserta['kd_kelas'].'/'.$last; ?>" method="post">
         <div class="modal-body">
+          <div style="padding-bottom:7%;"><input type="text" name="keterangan" class="form-control col-md-7 col-xs-12" placeholder=" Keterangan..."></div>
           <table class="table table-bordered table-hover table-compact">
             <thead>
               <tr>
@@ -231,7 +248,7 @@ $sem = $this->uri->segment(3);
                     }
                   }
                   ?>
-                  <td><input type="number" name="<?= $key_peserta['nis'];?>" value="0"></td>
+                  <td><input type="number" name="<?= $key_peserta['nis'];?>" value="0" class="form-control"></td>
                 </tr>
                 <?php
               }
@@ -282,7 +299,7 @@ $sem = $this->uri->segment(3);
                     }
                   }
                   ?>
-                  <td><input type="number" name="<?= $key_peserta['nis'];?>" value="0"></td>
+                  <td><input type="number" name="<?= $key_peserta['nis'];?>" value="0" class="form-control"></td>
                 </tr>
                 <?php
               }
@@ -333,7 +350,7 @@ $sem = $this->uri->segment(3);
                     }
                   }
                   ?>
-                  <td><input type="number" name="<?= $key_peserta['nis'];?>" value="0"></td>
+                  <td><input type="number" name="<?= $key_peserta['nis'];?>" value="0" class="form-control"></td>
                 </tr>
                 <?php
               }

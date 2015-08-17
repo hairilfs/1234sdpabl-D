@@ -250,6 +250,11 @@ class M_sdpa extends CI_Model {
 		return $res;
 	}
 
+	public function get_data_ket_latihan($where = "") {
+		$data = $this->db->query('select * from ket_latihan '.$where);
+		return $data->result_array();
+	}
+
 	// DATA KUIS
 	// cek max kuis
 	public function cek_max_kuis($where) {
@@ -275,6 +280,11 @@ class M_sdpa extends CI_Model {
 	public function delete_data_kuis($namaTable, $where) {
 		$res = $this->db->delete($namaTable, $where);
 		return $res;
+	}
+
+	public function get_data_ket_kuis($where = "") {
+		$data = $this->db->query('select * from ket_kuis '.$where);
+		return $data->result_array();
 	}
 
 	// DATA UAS

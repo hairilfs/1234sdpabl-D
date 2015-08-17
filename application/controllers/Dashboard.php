@@ -208,12 +208,14 @@ public function master_nilai($semester,$kelas,$jadwal) {
     $data_siswa = $this->m_sdpa->get_data_siswa();
     $data_latihan = $this->m_sdpa->get_data_latihan();
     $data_kuis = $this->m_sdpa->get_data_kuis();
-    $data_uas = $this->m_sdpa->get_data_uas();
+    $data_uas = $this->m_sdpa->get_data_uas("where kd_jadwal='$jadwal' ");
     $data_uts = $this->m_sdpa->get_data_uts("where kd_jadwal='$jadwal' ");
     $data2 = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+    $data_ket_latihan = $this->m_sdpa->get_data_ket_latihan("where semester='$semester' AND kd_jadwal='$jadwal' ");
+    $data_ket_kuis = $this->m_sdpa->get_data_ket_kuis("where semester='$semester' AND kd_jadwal='$jadwal' ");
 
     $this->template->load('vtemplate_guru','sdpa_bl/v_data_nilai', array('data_latihan' => $data_latihan, 'a'=> $jadwal, 'isi' => $data_guru,
-    'isi_peserta' => $data_peserta, 'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas, 'data_uts' => $data_uts, 'isi2' => $data2));
+    'isi_peserta' => $data_peserta, 'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas, 'data_uts' => $data_uts, 'isi2' => $data2, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis));
   } else {
     redirect("dashboard");
   }
@@ -256,6 +258,17 @@ public function isi_latihan($semester, $kelas, $jadwal) {
     );
     $this->m_sdpa->insert_data_latihan('latihan', $nilai_latihan);
   }
+
+  $data_keterangan = array(
+    'kd_ket_latihan' => $kd_latihan,
+    'kd_jadwal'=> $jadwal,
+    'tahun' => $tahun_yg_dicari,
+    'semester' => $semester,
+    'keterangan_latihan' => $_POST['keterangan']
+  );
+
+  $this->m_sdpa->insertData('ket_latihan', $data_keterangan);
+
   redirect("dashboard/master_nilai/$semester/$kelas/$jadwal");
 }
 
@@ -295,6 +308,17 @@ public function isi_kuis($semester, $kelas, $jadwal) {
     );
     $this->m_sdpa->insert_data_kuis('kuis', $nilai_kuis);
   }
+
+  $data_keterangan = array(
+    'kd_ket_kuis' => $kd_kuis,
+    'kd_jadwal'=> $jadwal,
+    'tahun' => $tahun_yg_dicari,
+    'semester' => $semester,
+    'keterangan_kuis' => $_POST['keterangan']
+  );
+
+  $this->m_sdpa->insertData('ket_kuis', $data_keterangan);
+
   redirect("dashboard/master_nilai/$semester/$kelas/$jadwal");
 }
 

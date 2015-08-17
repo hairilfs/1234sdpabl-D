@@ -58,7 +58,7 @@ function logout() {
 
 public function master_guru() {
 
-  $data = $this->m_sdpa->get_data_guru();
+  $data = $this->m_sdpa->get_data("guru");
   $this->template->load('vtemplate','sdpa_bl/v_lihat_guru', array('isi' => $data));
 
 }
@@ -81,22 +81,22 @@ public function master_akun_guru() {
 
 public function master_kelas() {
 
-  $data = $this->m_sdpa->get_data_kelas();
+  $data = $this->m_sdpa->get_data("kelas");
   $this->template->load('vtemplate','sdpa_bl/v_lihat_kelas', array('isi' => $data));
 
 }
 
 public function master_mapel() {
 
-  $data = $this->m_sdpa->get_data_mapel();
+  $data = $this->m_sdpa->get_data("mapel");
   $this->template->load('vtemplate','sdpa_bl/v_lihat_mapel', array('isi' => $data));
 
 }
 
 public function master_peserta() {
 
-  $data = $this->m_sdpa->get_data_peserta();
-  $data2 = $this->m_sdpa->get_data_kelas();
+  $data = $this->m_sdpa->get_data("peserta");
+  $data2 = $this->m_sdpa->get_data("kelas");
   $data3 = $this->m_sdpa->getSiswa();
   $this->template->load('vtemplate','sdpa_bl/v_lihat_peserta', array('isi' => $data, 'isi2' => $data2, 'isi3' => $data3));
 
@@ -104,10 +104,10 @@ public function master_peserta() {
 
 public function master_jadwal() {
 
-  $data = $this->m_sdpa->get_data_jadwal();
-  $data2 = $this->m_sdpa->get_data_mapel();
-  $data3 = $this->m_sdpa-> get_data_guru();
-  $data4 = $this->m_sdpa->get_data_kelas();
+  $data = $this->m_sdpa->get_data("jadwal");
+  $data2 = $this->m_sdpa->get_data("mapel");
+  $data3 = $this->m_sdpa-> get_data("guru");
+  $data4 = $this->m_sdpa->get_data("kelas");
   $this->template->load('vtemplate','sdpa_bl/v_lihat_jadwal', array('isi' => $data, 'isi2' => $data2, 'isi3' => $data3, 'isi4' => $data4));
 
 }
@@ -448,7 +448,7 @@ public function do_insert_guru() {
     'keahlian'          => $_POST['keahlian']
     );
 
-  $res = $this->m_sdpa->insert_data_guru('guru', $data_insert);
+  $res = $this->m_sdpa->insert_data('guru', $data_insert);
 
   if ($res >= 1) {
     $this->session->set_flashdata('pesan', 'Tambah data sukses!');
@@ -545,7 +545,7 @@ public function do_edit_guru() {
     );
   }
 
-  $res = $this->m_sdpa->update_data_guru('guru', $data_update, array('employee_id' => $_POST['employee_id']) );
+  $res = $this->m_sdpa->update_data('guru', $data_update, array('employee_id' => $_POST['employee_id']) );
 
   if ($res >= 1) {
 
@@ -599,7 +599,7 @@ public function do_edit_akun_guru() {
 
 public function do_delete_guru($employee_id)
   {
-    $res = $this->m_sdpa->delete_data_guru('guru', array('employee_id' => $employee_id));
+    $res = $this->m_sdpa->delete_data('guru', array('employee_id' => $employee_id));
 
     if ($res >= 1) {
 

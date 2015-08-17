@@ -55,11 +55,6 @@ class M_sdpa extends CI_Model {
 		return $data;
 	}
 
-	public function getMahasiswa($where = "") {
-		$data = $this->db->query('select * from mahasiswa '.$where);
-		return $data->result_array();
-	}
-
 	// CRUD UNIVERSAL
 
 	public function get_data($table, $where = "") {

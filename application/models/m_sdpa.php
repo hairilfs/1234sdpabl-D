@@ -60,6 +60,29 @@ class M_sdpa extends CI_Model {
 		return $data->result_array();
 	}
 
+	// CRUD UNIVERSAL
+
+	public function get_data($table, $where = "") {
+		$data = $this->db->query('select * from '.$table.' '.$where);
+		return $data->result_array();
+	}
+
+	public function insert_data($table, $data) {
+		$res = $this->db->insert($table, $data);
+		return $res;
+	}
+
+	public function update_data($table, $data, $where) {
+		$res = $this->db->update($table, $data, $where);
+		return $res;
+	}
+
+	public function delete_data($table, $where) {
+		$res = $this->db->delete($table, $where);
+		return $res;
+	}
+
+
 	// cek baris data
 	public function cek_baris_data($table) {
 		$query = $this->db->query("select * from ".$table);

@@ -68,11 +68,11 @@
                                             <li><a href="<?= base_url(); ?>dashboard/pilih_tahun">Penilaian</a></li>
                                             <li><a href="<?= base_url(); ?>dashboard/master_jadwal_guru">Jadwal Mengajar</a></li>
                                             <?php
-                                                foreach ($isi as $key_isi2) {
+                                                foreach ($isi2 as $key_isi2) {
                                                     if(isset($key_isi2['employee_id'])) {
                                             ?>
                                                         <li><a href="<?= base_url(); ?>dashboard/master_walikelas_data_siswa">Daftar Siswa ( Wali kelas )  </a></li>
-                                                        <li><a href="<?= base_url(); ?>dashboard/tahun_wali">Report Siswa ( Wali kelas)</a></li>
+                                                        <li><a href="<?= base_url(); ?>dashboard/tahun_wali">Report Siswa ( Wali kelas )</a></li>
                                             <?php
                                                     }
                                                 }

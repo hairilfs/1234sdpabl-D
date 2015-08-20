@@ -59,7 +59,7 @@ class Login extends CI_Controller {
                 'lvl'     => $level
             ));
 
-            $this->m_sdpa->update_login($logData, array('id_user' => $id_user));
+            $this->m_sdpa->update_data("user", $logData, array('id_user' => $id_user));
             // $this->dashboard;
           	redirect('dashboard','refresh');
 

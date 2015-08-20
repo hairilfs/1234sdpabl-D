@@ -23,8 +23,8 @@ function index() {
     $this->template->load('vtemplate','sdpa_bl/hello');
 
   } elseif ($stat == "guru") {
-    $data = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-    $data2 = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+    $data = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+    $data2 = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
     $this->template->load('vtemplate_guru','sdpa_bl/hello_guru', array('isi' => $data, 'isi2' => $data2));
 
   } else {
@@ -65,16 +65,16 @@ public function master_guru() {
 
 public function master_profile_guru() {
   $asd = $this->session->userdata('u_id');
-  $data = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-  $data2 = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+  $data = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+  $data2 = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
   $this->template->load('vtemplate_guru','sdpa_bl/v_profile_guru', array('isi' => $data, 'isi2' => $data2));
 
 }
 
 public function master_akun_guru() {
   $asd = $this->session->userdata('u_id');
-  $data = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-  $data2 = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+  $data = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+  $data2 = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
   $this->template->load('vtemplate_guru','sdpa_bl/v_akun_guru', array('isi' => $data, 'isi2' => $data2));
 
 }
@@ -97,7 +97,7 @@ public function master_peserta() {
 
   $data = $this->m_sdpa->get_data("peserta");
   $data2 = $this->m_sdpa->get_data("kelas");
-  $data3 = $this->m_sdpa->getSiswa();
+  $data3 = $this->m_sdpa->get_data("siswa");
   $this->template->load('vtemplate','sdpa_bl/v_lihat_peserta', array('isi' => $data, 'isi2' => $data2, 'isi3' => $data3));
 
 }
@@ -115,9 +115,9 @@ public function master_jadwal() {
 public function master_jadwal_guru() {
 
   $asd    = $this->session->userdata('u_id');
-  $data   = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
+  $data   = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
   $data4  = $this->m_sdpa->get_data_jadwal_guru("where a.employee_id=b.employee_id AND a.kd_mapel=c.kd_mapel AND a.kd_kelas=d.kd_kelas AND a.employee_id = '$asd' ");
-  $data2  = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+  $data2  = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
   $this->template->load('vtemplate_guru','sdpa_bl/v_lihat_jadwal_guru', array('isi' => $data, 'isi4' => $data4, 'isi2' => $data2));
 
 }
@@ -125,9 +125,9 @@ public function master_jadwal_guru() {
 public function master_walikelas_data_siswa() {
 
   $asd    = $this->session->userdata('u_id');
-  $data   = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
+  $data   = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
   $data4  = $this->m_sdpa->get_data_jadwal_guru("where a.employee_id=b.employee_id AND a.kd_mapel=c.kd_mapel AND a.kd_kelas=d.kd_kelas AND a.employee_id = '$asd' ");
-  $data2  =$this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+  $data2  =$this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
   $data3  = $this->m_sdpa->getWalikelasDataSiswa("where a.employee_id=e.Employee_id and b.kd_kelas=d.kd_kelas and c.NIS=d.nis and d.kd_kelas=e.Kd_kelas and e.Employee_id='$asd' ");
 
   $this->template->load('vtemplate_guru','sdpa_bl/v_lihat_siswa_walikelas', array('isi' => $data, 'isi4' => $data4, 'isi3' => $data3, 'isi2' => $data2));
@@ -136,59 +136,59 @@ public function master_walikelas_data_siswa() {
 
 public function pilih_tahun() {
   $asd = $this->session->userdata('u_id');
-  $data = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-  $data2 = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+  $data = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+  $data2 = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
   $this->template->load('vtemplate_guru','sdpa_bl/v_penilaian_guru', array('isi' => $data, 'isi2' => $data2));
 }
 
 public function tahun_wali() {
   $asd    = $this->session->userdata('u_id');
-  $data   = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-  $data2  = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+  $data   = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+  $data2  = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
   $this->template->load('vtemplate_guru','sdpa_bl/v_tahun_wali', array('isi' => $data, 'isi2' => $data2));
 }
 
 public function report_siswa() {
-    $kd_jdw_now   = ""; 
-    $tahun        = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ; 
-    $semester     = isset($_POST['semester']) ? $_POST['semester'] : '' ; 
+    $kd_jdw_now   = "";
+    $tahun        = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ;
+    $semester     = isset($_POST['semester']) ? $_POST['semester'] : '' ;
     $asd          = $this->session->userdata('u_id');
-    $data_guru    = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
-    $data_walkel  = $this->m_sdpa->getWalikelas("where Employee_id='$asd' ");
-    
+    $data_guru    = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+    $data_walkel  = $this->m_sdpa->get_data("walikelas", "where Employee_id='$asd' ");
+
     foreach ($data_walkel as $key_walkel) {
       if ($key_walkel['Employee_id']==$asd) {
-        $kelas = $key_walkel['Kd_kelas']; 
+        $kelas = $key_walkel['Kd_kelas'];
       }
     }
 
-    $data_peserta = $this->m_sdpa->get_data_peserta("where kd_kelas = '$kelas' order by nis");
-    $data_jadwal  = $this->m_sdpa->get_data_jadwal("where thn_ajar='$tahun' and semester='$semester' and kd_kelas='$kelas' ");
+    $data_peserta = $this->m_sdpa->get_data("peserta", "where kd_kelas = '$kelas' order by nis");
+    $data_jadwal  = $this->m_sdpa->get_data("jadwal", "where thn_ajar='$tahun' and semester='$semester' and kd_kelas='$kelas' ");
 
     foreach ($data_jadwal as $key_jadwal) {
         if ($kd_jdw_now == "") {
-          $kd_jdw_now = "'".$key_jadwal['kd_jadwal']."'";  
+          $kd_jdw_now = "'".$key_jadwal['kd_jadwal']."'";
         } else {
           $kd_jdw_now = $kd_jdw_now.","."'".$key_jadwal['kd_jadwal']."'";
         }
     }
-    
-    $data_ket_latihan = $this->m_sdpa->get_data_ket_latihan("where semester='$semester' AND tahun='$tahun' ");
-    $data_ket_kuis= $this->m_sdpa->get_data_ket_kuis("where semester='$semester' AND tahun='$tahun' ");
-    $data_mapel   = $this->m_sdpa->get_data_mapel();
-    $data_siswa   = $this->m_sdpa->get_data_siswa();
-    $data_guru2   = $this->m_sdpa->get_profile_guru();
-    $data_latihan = $this->m_sdpa->get_data_latihan("where kd_jadwal in ($kd_jdw_now) order by kd_lat");
-    $data_kuis    = $this->m_sdpa->get_data_kuis("where kd_jadwal in ($kd_jdw_now) order by kd_kuis");
-    $data_uas     = $this->m_sdpa->get_data_uas("where kd_jadwal in ($kd_jdw_now) order by kd_uas");
-    $data_uts     = $this->m_sdpa->get_data_uts("where kd_jadwal in ($kd_jdw_now) order by kd_uts");
+
+    $data_ket_latihan = $this->m_sdpa->get_data("ket_latihan", "where semester='$semester' AND tahun='$tahun' ");
+    $data_ket_kuis= $this->m_sdpa->get_data("kuis", "where semester='$semester' AND tahun='$tahun' ");
+    $data_mapel   = $this->m_sdpa->get_data("mapel");
+    $data_siswa   = $this->m_sdpa->get_data("siswa");
+    $data_guru2   = $this->m_sdpa->get_data("guru");
+    $data_latihan = $this->m_sdpa->get_data("latihan", "where kd_jadwal in ($kd_jdw_now) order by kd_lat");
+    $data_kuis    = $this->m_sdpa->get_data("kuis", "where kd_jadwal in ($kd_jdw_now) order by kd_kuis");
+    $data_uas     = $this->m_sdpa->get_data("uas", "where kd_jadwal in ($kd_jdw_now) order by kd_uas");
+    $data_uts     = $this->m_sdpa->get_data("uts", "where kd_jadwal in ($kd_jdw_now) order by kd_uts");
 
 
     $this->template->load('vtemplate_guru','sdpa_bl/v_report_siswa', array(
       'data_latihan' => $data_latihan, 'isi' => $data_guru,'isi_peserta' => $data_peserta,
       'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas,
       'data_uts' => $data_uts, 'data_jadwal' => $data_jadwal, 'data_mapel' => $data_mapel,
-      'cekw' => $kelas." - ".$semester." - ".$tahun.$kd_jdw_now, 'data_guru2' => $data_guru2, 
+      'cekw' => $kelas." - ".$semester." - ".$tahun.$kd_jdw_now, 'data_guru2' => $data_guru2,
       'isi2' => $data_guru, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis
     ));
 }
@@ -198,10 +198,10 @@ public function daftar_jadwal() {
   $tahun     = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ;
   $semester  = isset($_POST['semester']) ? $_POST['semester'] : '' ;
 
-  $data = $this->m_sdpa->get_data_jadwal("where thn_ajar='$tahun' and semester='$semester' and employee_id='$asd' ");
-  $data2 = $this->m_sdpa->get_data_mapel();
-  $data3 = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-  $data4 = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+  $data  = $this->m_sdpa->get_data("jadwal", "where thn_ajar='$tahun' and semester='$semester' and employee_id='$asd' ");
+  $data2 = $this->m_sdpa->get_data("mapel");
+  $data3 = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+  $data4 = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
 
   $this->template->load('vtemplate_guru','sdpa_bl/v_daftar_jadwal', array('isi_jadwal' => $data, 'isi_mapel' => $data2, 'isi' => $data3, 'isi2' => $data4));
 }
@@ -210,19 +210,20 @@ public function daftar_jadwal() {
 public function master_nilai($semester,$kelas,$jadwal) {
   if(isset($kelas) AND isset($jadwal)) {
     $asd = $this->session->userdata('u_id');
-    $data_guru = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-    $data_peserta = $this->m_sdpa->get_data_peserta("where kd_kelas = '$kelas' ");
-    $data_siswa = $this->m_sdpa->get_data_siswa();
-    $data_latihan = $this->m_sdpa->get_data_latihan();
-    $data_kuis = $this->m_sdpa->get_data_kuis();
-    $data_uas = $this->m_sdpa->get_data_uas("where kd_jadwal='$jadwal' ");
-    $data_uts = $this->m_sdpa->get_data_uts("where kd_jadwal='$jadwal' ");
-    $data2 = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
-    $data_ket_latihan = $this->m_sdpa->get_data_ket_latihan("where semester='$semester' AND kd_jadwal='$jadwal' ");
-    $data_ket_kuis = $this->m_sdpa->get_data_ket_kuis("where semester='$semester' AND kd_jadwal='$jadwal' ");//
+    $data_guru = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+    $data_peserta = $this->m_sdpa->get_data("peserta", "where kd_kelas = '$kelas' ");
+    $data_siswa = $this->m_sdpa->get_data("siswa");
+    $data_latihan = $this->m_sdpa->get_data("latihan");
+    $data_kuis = $this->m_sdpa->get_data("kuis");
+    $data_uas = $this->m_sdpa->get_data("uas", "where kd_jadwal='$jadwal' ");
+    $data_uts = $this->m_sdpa->get_data("uts", "where kd_jadwal='$jadwal' ");
+    $data2 = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
+    $data_ket_latihan = $this->m_sdpa->get_data("ket_latihan", "where semester='$semester' AND kd_jadwal='$jadwal' ");
+    $data_ket_kuis = $this->m_sdpa->get_data("ket_kuis", "where semester='$semester' AND kd_jadwal='$jadwal' ");//
 
     $this->template->load('vtemplate_guru','sdpa_bl/v_data_nilai', array('data_latihan' => $data_latihan, 'a'=> $jadwal, 'isi' => $data_guru,
-    'isi_peserta' => $data_peserta, 'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas, 'data_uts' => $data_uts, 'isi2' => $data2, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis));
+    'isi_peserta' => $data_peserta, 'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas, 'data_uts' => $data_uts,
+    'isi2' => $data2, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis));
   } else {
     redirect("dashboard");
   }
@@ -231,9 +232,9 @@ public function master_nilai($semester,$kelas,$jadwal) {
 // ISI LATIHAN
 public function isi_latihan($semester, $kelas, $jadwal) {
   $asd = $this->session->userdata('u_id');
-  $data_guru = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-  $data_peserta = $this->m_sdpa->get_data_peserta("where kd_kelas = '$kelas' ");
-  $data_siswa = $this->m_sdpa->get_data_siswa();
+  $data_guru = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+  $data_peserta = $this->m_sdpa->get_data("peserta", "where kd_kelas = '$kelas' ");
+  $data_siswa = $this->m_sdpa->get_data("siswa");
   // $data_latihan = $this->m_sdpa->get_data_latihan();
 
   $query = $this->db->query("select * from latihan where kd_jadwal='$jadwal'");
@@ -263,7 +264,7 @@ public function isi_latihan($semester, $kelas, $jadwal) {
       'tahun' => $tahun_yg_dicari,
       'semester' => $semester
     );
-    $this->m_sdpa->insert_data_latihan('latihan', $nilai_latihan);
+    $this->m_sdpa->insert_data("latihan", $nilai_latihan);
   }
 
   $data_keterangan = array(
@@ -274,7 +275,7 @@ public function isi_latihan($semester, $kelas, $jadwal) {
     'keterangan_latihan' => $_POST['keterangan']
   );
 
-  $this->m_sdpa->insertData('ket_latihan', $data_keterangan);
+  $this->m_sdpa->insert_data("ket_latihan", $data_keterangan);
 
   redirect("dashboard/master_nilai/$semester/$kelas/$jadwal");
 }
@@ -282,9 +283,9 @@ public function isi_latihan($semester, $kelas, $jadwal) {
 // ISI KUIS
 public function isi_kuis($semester, $kelas, $jadwal) {
   $asd = $this->session->userdata('u_id');
-  $data_guru = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-  $data_peserta = $this->m_sdpa->get_data_peserta("where kd_kelas = '$kelas' ");
-  $data_siswa = $this->m_sdpa->get_data_siswa();
+  $data_guru = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+  $data_peserta = $this->m_sdpa->get_data("peserta", "where kd_kelas = '$kelas' ");
+  $data_siswa = $this->m_sdpa->get_data("siswa");
 
   $query = $this->db->query("select * from kuis where kd_jadwal='$jadwal'");
   $maxdat = $this->m_sdpa->cek_max_kuis("where kd_jadwal='$jadwal' ");
@@ -313,7 +314,7 @@ public function isi_kuis($semester, $kelas, $jadwal) {
       'tahun' => $tahun_yg_dicari,
       'semester' => $semester
     );
-    $this->m_sdpa->insert_data_kuis('kuis', $nilai_kuis);
+    $this->m_sdpa->insert_data('kuis', $nilai_kuis);
   }
 
   $data_keterangan = array(
@@ -324,7 +325,7 @@ public function isi_kuis($semester, $kelas, $jadwal) {
     'keterangan_kuis' => $_POST['keterangan']
   );
 
-  $this->m_sdpa->insertData('ket_kuis', $data_keterangan);
+  $this->m_sdpa->insert_data('ket_kuis', $data_keterangan);
 
   redirect("dashboard/master_nilai/$semester/$kelas/$jadwal");
 }
@@ -332,9 +333,9 @@ public function isi_kuis($semester, $kelas, $jadwal) {
 // ISI UAS
 public function isi_uas($semester, $kelas, $jadwal) {
   $asd = $this->session->userdata('u_id');
-  $data_guru = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-  $data_peserta = $this->m_sdpa->get_data_peserta("where kd_kelas = '$kelas' ");
-  $data_siswa = $this->m_sdpa->get_data_siswa();
+  $data_guru = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+  $data_peserta = $this->m_sdpa->get_data("peserta", "where kd_kelas = '$kelas' ");
+  $data_siswa = $this->m_sdpa->get_data("siswa");
 
   $query = $this->db->query("select * from uas where kd_jadwal='$jadwal'");
   $maxdat = $this->m_sdpa->cek_max_uas("where kd_jadwal='$jadwal' ");
@@ -363,7 +364,7 @@ public function isi_uas($semester, $kelas, $jadwal) {
       'tahun' => $tahun_yg_dicari,
       'semester' => $semester
     );
-    $this->m_sdpa->insert_data_uas('uas', $nilai_uas);
+    $this->m_sdpa->insert_data('uas', $nilai_uas);
   }
   redirect("dashboard/master_nilai/$semester/$kelas/$jadwal");
 }
@@ -371,9 +372,9 @@ public function isi_uas($semester, $kelas, $jadwal) {
 // ISI UTS
 public function isi_uts($semester, $kelas, $jadwal) {
   $asd = $this->session->userdata('u_id');
-  $data_guru = $this->m_sdpa->get_profile_guru("where employee_id = '$asd' ");
-  $data_peserta = $this->m_sdpa->get_data_peserta("where kd_kelas = '$kelas' ");
-  $data_siswa = $this->m_sdpa->get_data_siswa();
+  $data_guru = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+  $data_peserta = $this->m_sdpa->get_data("peserta", "where kd_kelas = '$kelas' ");
+  $data_siswa = $this->m_sdpa->get_data("siswa");
 
   $query = $this->db->query("select * from uts where kd_jadwal='$jadwal'");
   $maxdat = $this->m_sdpa->cek_max_uts("where kd_jadwal='$jadwal' ");
@@ -402,7 +403,7 @@ public function isi_uts($semester, $kelas, $jadwal) {
       'tahun' => $tahun_yg_dicari,
       'semester' => $semester
     );
-    $this->m_sdpa->insert_data_uts('uts', $nilai_uts);
+    $this->m_sdpa->insert_data('uts', $nilai_uts);
   }
   redirect("dashboard/master_nilai/$semester/$kelas/$jadwal");
 }
@@ -584,7 +585,7 @@ public function do_edit_akun_guru() {
       $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
       </button><p align="center">Ubah password SUKSES!</p></div>';
-      $res = $this->m_sdpa->update_akun_guru('user', $data_update, array('id_user' => $asd) );
+      $res = $this->m_sdpa->update_data('user', $data_update, array('id_user' => $asd) );
 
     } else {
       $notif = '<div class="alert alert-warning alert-dismissible fade in" role="alert">
@@ -626,7 +627,7 @@ public function do_insert_kelas() {
     'kapasitas' => $_POST['kapasitas']
     );
 
-  $res = $this->m_sdpa->insert_data_kelas('kelas', $data_insert);
+  $res = $this->m_sdpa->insert_data('kelas', $data_insert);
 
   if ($res >= 1) {
     $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -651,7 +652,7 @@ public function do_edit_kelas() {
     'kapasitas' => $_POST['kapasitas']
     );
 
-  $res = $this->m_sdpa->update_data_kelas('kelas', $data_update, array('kd_kelas' => $_POST['kd_kelas']) );
+  $res = $this->m_sdpa->update_data('kelas', $data_update, array('kd_kelas' => $_POST['kd_kelas']) );
 
   if ($res >= 1) {
     $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -667,7 +668,7 @@ public function do_edit_kelas() {
 }
 
 public function do_delete_kelas($kd_kelas) {
-    $res = $this->m_sdpa->delete_data_kelas('kelas', array('kd_kelas' => $kd_kelas));
+    $res = $this->m_sdpa->delete_data('kelas', array('kd_kelas' => $kd_kelas));
 
     if ($res >= 1) {
       $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -691,7 +692,7 @@ public function do_insert_mapel() {
     'kkm'       => $_POST['kkm']
     );
 
-  $res = $this->m_sdpa->insert_data_mapel('mapel', $data_insert);
+  $res = $this->m_sdpa->insert_data('mapel', $data_insert);
   if ($res >= 1) {
     $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
@@ -712,7 +713,7 @@ public function do_edit_mapel() {
     'kkm'       => $_POST['kkm']
     );
 
-  $res = $this->m_sdpa->update_data_mapel('mapel', $data_update, array('kd_mapel' => $_POST['kd_mapel']) );
+  $res = $this->m_sdpa->update_data('mapel', $data_update, array('kd_mapel' => $_POST['kd_mapel']) );
 
   if ($res >= 1) {
     $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -729,7 +730,7 @@ public function do_edit_mapel() {
 
 public function do_delete_mapel($kd_mapel)
   {
-    $res = $this->m_sdpa->delete_data_mapel('mapel', array('kd_mapel' => $kd_mapel));
+    $res = $this->m_sdpa->delete_data('mapel', array('kd_mapel' => $kd_mapel));
 
     if ($res >= 1) {
       $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -753,7 +754,7 @@ public function do_insert_peserta() {
     'thn_ajar'  => $_POST['thn_ajar']
     );
 
-  $res = $this->m_sdpa->insert_data_peserta('peserta', $data_insert);
+  $res = $this->m_sdpa->insert_data('peserta', $data_insert);
   if ($res >= 1) {
     $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
@@ -774,7 +775,7 @@ public function do_edit_peserta($kd_peserta) {
     'thn_ajar'  => $_POST['thn_ajar']
     );
 
-  $res = $this->m_sdpa->update_data_peserta('peserta', $data_update, array('kd_peserta' => $kd_peserta));
+  $res = $this->m_sdpa->update_data('peserta', $data_update, array('kd_peserta' => $kd_peserta));
 
   if ($res >= 1) {
     $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -791,7 +792,7 @@ public function do_edit_peserta($kd_peserta) {
 
 public function do_delete_peserta($kd_peserta)
   {
-    $res = $this->m_sdpa->delete_data_peserta('peserta', array('kd_peserta' => $kd_peserta));
+    $res = $this->m_sdpa->delete_data('peserta', array('kd_peserta' => $kd_peserta));
 
     if ($res >= 1) {
       $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -820,7 +821,7 @@ public function do_insert_jadwal() {
     'ruang'       => $_POST['ruang']
     );
 
-  $res = $this->m_sdpa->insert_data_jadwal('jadwal', $data_insert);
+  $res = $this->m_sdpa->insert_data('jadwal', $data_insert);
 
   if ($res >= 1) {
     $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -846,7 +847,7 @@ public function do_edit_jadwal() {
     'ruang'       => $_POST['ruang']
     );
 
-  $res = $this->m_sdpa->update_data_jadwal('jadwal', $data_update, array('kd_jadwal' => $_POST['kd_jadwal']) );
+  $res = $this->m_sdpa->update_data('jadwal', $data_update, array('kd_jadwal' => $_POST['kd_jadwal']) );
 
   if ($res >= 1) {
     $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -863,7 +864,7 @@ public function do_edit_jadwal() {
 
 public function do_delete_jadwal($kd_jadwal)
   {
-    $res = $this->m_sdpa->delete_data_jadwal('jadwal', array('kd_jadwal' => $kd_jadwal));
+    $res = $this->m_sdpa->delete_data('jadwal', array('kd_jadwal' => $kd_jadwal));
 
     if ($res >= 1) {
       $notif = '<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -878,33 +879,14 @@ public function do_delete_jadwal($kd_jadwal)
       redirect("dashboard/master_jadwal");
   }
 
-public function addData() {
-
-  echo "<h2>Tambah data</h2>";
-  $this->load->view('form_add');
-
-}
-
-public function doEdit($nim) {
-  $mhs        = $this->m_sdpa->getMahasiswa("where nim = '$nim' ");
-  $data       = array(
-    'nim'   => $mhs[0]['nim'],
-    'nama'  => $mhs[0]['nama'],
-    'alamat'=> $mhs[0]['alamat']
-    );
-
-  $this->load->view('form_edit', $data);
-}
-
-
 /* Walikelas */
 
 public function master_walikelas() {
 
     $data = $this->m_sdpa->getWalikelas();
     $data2  = $this->m_sdpa->getUser("where a.employee_id not in (select b.Employee_id from walikelas b)");
-    $data3 = $this->m_sdpa->get_data_kelas();
-    $data4 = $this->m_sdpa-> get_data_guru();
+    $data3 = $this->m_sdpa->get_data("kelas");
+    $data4 = $this->m_sdpa-> get_data("guru");
     $this->template->load('vtemplate','sdpa_bl/v_lihat_walikelas', array('isi' => $data, 'isi2' => $data2, 'isi3' => $data3, 'isi4' => $data4));
 
 }
@@ -915,7 +897,7 @@ public function do_insert_walikelas() {
     $kd_kelas       = $_POST['kd_kelas'];
 
     $a= "N";
-    $data3 = $this->m_sdpa->getUser3("where id_user = '$employee_id' ");
+    $data3 = $this->m_sdpa->get_data("user", "where id_user = '$employee_id' ");
     if(isset($data3)) {
       $a = "Y";
     } else {
@@ -932,9 +914,9 @@ public function do_insert_walikelas() {
         'walikelas' => $a
     );
 
-    $res2 = $this->m_sdpa->updateData('user', $data_update, array('id_user' =>$employee_id));
+    $res2 = $this->m_sdpa->update_data('user', $data_update, array('id_user' =>$employee_id));
 
-    $res = $this->m_sdpa->insertData('walikelas', $data_insert);
+    $res = $this->m_sdpa->insert_data('walikelas', $data_insert);
 
     if ($res >= 1 || $res2 >=1 ) {
 
@@ -962,7 +944,7 @@ public function do_edit_walikelas() {
         'Kd_kelas'  => $kd_kelas
     );
 
-    $res = $this->m_sdpa->updateData('walikelas', $data_update, array('Kd_walikelas' =>$kd_walikelas));
+    $res = $this->m_sdpa->update_data('walikelas', $data_update, array('Kd_walikelas' =>$kd_walikelas));
 
     if ($res >= 1) {
 
@@ -977,7 +959,7 @@ public function do_edit_walikelas() {
 }
 
 public function do_delete_walikelas($kd_walikelas) {
-    $res = $this->m_sdpa->deleteData('walikelas', array('Kd_walikelas' => $kd_walikelas));
+    $res = $this->m_sdpa->delete_data('walikelas', array('Kd_walikelas' => $kd_walikelas));
 
     if ($res >= 1) {
 
@@ -993,7 +975,7 @@ public function do_delete_walikelas($kd_walikelas) {
 
 public function master_siswa() {
 
-    $data = $this->m_sdpa->getSiswa();
+    $data = $this->m_sdpa->get_data("siswa");
     $this->template->load('vtemplate','sdpa_bl/v_lihat_siswa', array('isi' => $data));
 
 }
@@ -1068,7 +1050,7 @@ public function do_insert_siswa() {
         'Foto'  => $foto
     );
 
-    $res = $this->m_sdpa->insertData('siswa', $data_insert);
+    $res = $this->m_sdpa->insert_data('siswa', $data_insert);
 
     if ($res >= 1) {
 
@@ -1179,7 +1161,7 @@ public function do_edit_siswa() {
             'Prestasi'        => $prestasi
         );
     }
-    $res = $this->m_sdpa->updateData('siswa', $data_update, array('NIS' =>$nis));
+    $res = $this->m_sdpa->update_data('siswa', $data_update, array('NIS' =>$nis));
 
     if ($res >= 1) {
 
@@ -1194,7 +1176,7 @@ public function do_edit_siswa() {
 }
 
 public function do_delete_siswa($nis) {
-    $res = $this->m_sdpa->deleteData('siswa', array('NIS' => $nis));
+    $res = $this->m_sdpa->delete_data('siswa', array('NIS' => $nis));
 
     if ($res >= 1) {
 
@@ -1214,13 +1196,13 @@ public function master_user() {
 
     $data  = $this->m_sdpa->getUser("where a.employee_id not in (select b.id_user from user b)");
     $data2 = $this->m_sdpa->getUser2("where a.id_user = b.employee_id and (level = 'guru')");
-    $data3 = $this->m_sdpa->getWalikelas();
+    $data3 = $this->m_sdpa->get_data("walikelas");
     $this->template->load('vtemplate','sdpa_bl/v_lihat_user', array('isi' => $data, 'isi2' => $data2, 'isi3' => $data3));
 
 }
 
 public function do_insert_user() {
-    $data3 = $this->m_sdpa->getWalikelas();
+    $data3 = $this->m_sdpa->get_data("walikelas");
 
     $user = isset($_POST['user']) ? $_POST['user'] : '';
     $a = "N";
@@ -1246,7 +1228,7 @@ public function do_insert_user() {
         'walikelas' => $a
     );
 
-    $res = $this->m_sdpa->insertData('user', $data_insert);
+    $res = $this->m_sdpa->insert_data('user', $data_insert);
 
     if ($res >= 1) {
 
@@ -1270,7 +1252,7 @@ public function do_edit_user() {
         'password'  => $password
     );
 
-    $res = $this->m_sdpa->updateData('user', $data_update, array('id_user' =>$id_user));
+    $res = $this->m_sdpa->update_data('user', $data_update, array('id_user' =>$id_user));
 
     if ($res >= 1) {
 
@@ -1285,7 +1267,7 @@ public function do_edit_user() {
 }
 
 public function do_delete_user($id_user) {
-    $res = $this->m_sdpa->deleteData('user', array('id_user' => $id_user));
+    $res = $this->m_sdpa->delete_data('user', array('id_user' => $id_user));
 
     if ($res >= 1) {
 

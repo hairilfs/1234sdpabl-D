@@ -149,27 +149,32 @@ public function tahun_wali() {
 }
 
 public function report_siswa() {
-  // if(isset($kelas) AND isset($jadwal)) {
-    $kd_jdw_now   = ""; // ok
-    $tahun        = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ; // ok
-    $semester     = isset($_POST['semester']) ? $_POST['semester'] : '' ; // ok
+    $kd_jdw_now   = ""; 
+    $tahun        = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ; 
+    $semester     = isset($_POST['semester']) ? $_POST['semester'] : '' ; 
     $asd          = $this->session->userdata('u_id');
     $data_guru    = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
     $data_walkel  = $this->m_sdpa->getWalikelas("where Employee_id='$asd' ");
+    
     foreach ($data_walkel as $key_walkel) {
       if ($key_walkel['Employee_id']==$asd) {
-        $kelas = $key_walkel['Kd_kelas']; // ok
+        $kelas = $key_walkel['Kd_kelas']; 
       }
     }
+
     $data_peserta = $this->m_sdpa->get_data_peserta("where kd_kelas = '$kelas' order by nis");
     $data_jadwal  = $this->m_sdpa->get_data_jadwal("where thn_ajar='$tahun' and semester='$semester' and kd_kelas='$kelas' ");
+
     foreach ($data_jadwal as $key_jadwal) {
         if ($kd_jdw_now == "") {
-          $kd_jdw_now = "'".$key_jadwal['kd_jadwal']."'"; // belum bisa ambil banyak jadwal
+          $kd_jdw_now = "'".$key_jadwal['kd_jadwal']."'";  
         } else {
           $kd_jdw_now = $kd_jdw_now.","."'".$key_jadwal['kd_jadwal']."'";
         }
     }
+    
+    $data_ket_latihan = $this->m_sdpa->get_data_ket_latihan("where semester='$semester' AND tahun='$tahun' ");
+    $data_ket_kuis= $this->m_sdpa->get_data_ket_kuis("where semester='$semester' AND tahun='$tahun' ");
     $data_mapel   = $this->m_sdpa->get_data_mapel();
     $data_siswa   = $this->m_sdpa->get_data_siswa();
     $data_guru2   = $this->m_sdpa->get_profile_guru();
@@ -178,15 +183,14 @@ public function report_siswa() {
     $data_uas     = $this->m_sdpa->get_data_uas("where kd_jadwal in ($kd_jdw_now) order by kd_uas");
     $data_uts     = $this->m_sdpa->get_data_uts("where kd_jadwal in ($kd_jdw_now) order by kd_uts");
 
+
     $this->template->load('vtemplate_guru','sdpa_bl/v_report_siswa', array(
-      'data_latihan' => $data_latihan, 'isi' => $data_guru, 'isi_peserta' => $data_peserta,
+      'data_latihan' => $data_latihan, 'isi' => $data_guru,'isi_peserta' => $data_peserta,
       'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas,
       'data_uts' => $data_uts, 'data_jadwal' => $data_jadwal, 'data_mapel' => $data_mapel,
-      'cekw' => $kelas." - ".$semester." - ".$tahun.$kd_jdw_now, 'data_guru2' => $data_guru2
+      'cekw' => $kelas." - ".$semester." - ".$tahun.$kd_jdw_now, 'data_guru2' => $data_guru2, 
+      'isi2' => $data_guru, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis
     ));
-  // } else {
-  //   redirect("dashboard");
-  // }
 }
 
 public function daftar_jadwal() {
@@ -215,7 +219,7 @@ public function master_nilai($semester,$kelas,$jadwal) {
     $data_uts = $this->m_sdpa->get_data_uts("where kd_jadwal='$jadwal' ");
     $data2 = $this->m_sdpa->get_profile_guru("where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
     $data_ket_latihan = $this->m_sdpa->get_data_ket_latihan("where semester='$semester' AND kd_jadwal='$jadwal' ");
-    $data_ket_kuis = $this->m_sdpa->get_data_ket_kuis("where semester='$semester' AND kd_jadwal='$jadwal' ");
+    $data_ket_kuis = $this->m_sdpa->get_data_ket_kuis("where semester='$semester' AND kd_jadwal='$jadwal' ");//
 
     $this->template->load('vtemplate_guru','sdpa_bl/v_data_nilai', array('data_latihan' => $data_latihan, 'a'=> $jadwal, 'isi' => $data_guru,
     'isi_peserta' => $data_peserta, 'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas, 'data_uts' => $data_uts, 'isi2' => $data2, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis));

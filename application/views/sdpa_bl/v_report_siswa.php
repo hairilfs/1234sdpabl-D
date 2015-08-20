@@ -9,31 +9,32 @@
       foreach ($data_mapel as $key_mapel) {
         if ($key_jadwal['kd_mapel']==$key_mapel['kd_mapel']) { ?>
 
+          <?php
+              foreach ($data_guru2 as $key_guru2) {
+                if ($key_guru2['employee_id']==$key_jadwal['employee_id']) {
+                  $nmguru = $key_guru2['nama_guru'];
+                }
+              }
+          ?>
+
           <li>
             <div class="block">
               <div class="block_content">
                 <h2 class="title" style="font-weight: bold;">
-                  <a href="#" data-toggle="modal" data-target="#see-<?= $key_mapel['kd_mapel']; ?>"><?= $key_mapel['nm_mapel']; ?></a>
+                  <a href="#" data-toggle="modal" data-target="#see-<?= $key_jadwal['kd_jadwal']; ?>"><?= $key_mapel['nm_mapel']; ?> - <?= $key_jadwal['kd_jadwal']; ?> - <?= $nmguru; ?></a>
                 </h2>
               </div>
             </div>
           </li>
 
           <!-- MODAL LIHAT DETAIL -->
-          <div class="modal fade bs-example-modal-lg" id="see-<?= $key_mapel['kd_mapel']; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal fade bs-example-modal-lg" id="see-<?= $key_jadwal['kd_jadwal']; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header">  
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                   </button>
-                  <?php
-                  foreach ($data_guru2 as $key_guru2) {
-                    if ($key_guru2['employee_id']==$key_jadwal['employee_id']) {
-                      $nmguru = $key_guru2['nama_guru'];
-                    }
-                  }
-                  ?>
-                  <h4 class="modal-title" id="myModalLabel2">Nilai <?= $key_mapel['nm_mapel']; ?> || Guru : <?php echo $nmguru; ?></h4>
+                  <h4 class="modal-title" id="myModalLabel2"> <?= $key_mapel['nm_mapel']; ?> - <?= $key_jadwal['kd_jadwal'] ?> - <?= $nmguru; ?></h4>
                 </div>
                 <div class="modal-body">
                   <div class="table-responsive">
@@ -50,8 +51,16 @@
                             $cek_isi_lat = isset($key_data_latihan['kd_lat']) ? $key_data_latihan['kd_lat'] : '';
                             $kode = "LT000";
                             $kodeurut = $kode.$urut;
-                            if($key_data_latihan['kd_lat']==$kodeurut && $key_data_latihan['kd_jadwal']==$key_jadwal['kd_jadwal']) {
-                              echo "<th>Latihan ".$urut++."</th>";
+
+                            foreach ($data_ket_latihan as $key_data_ket_latihan) {
+                              if($key_data_ket_latihan['kd_ket_latihan']==$kodeurut) {
+                                $tooltip_ket_lat = $key_data_ket_latihan['keterangan_latihan'];
+                              
+                                if($key_data_latihan['kd_lat']==$kodeurut && $key_data_latihan['kd_jadwal']==$key_jadwal['kd_jadwal'] && $key_data_latihan['kd_jadwal']==$key_data_ket_latihan['kd_jadwal']) {
+                                  echo "<th>Latihan".$urut++." <a href='javascript:;'><i class='fa fa-question-circle fa-lg' data-toggle='tooltip' data-placement='top' title='$tooltip_ket_lat'></i></a></th>";
+                                }
+
+                              }
                             }
                           }
 
@@ -60,8 +69,15 @@
                             $cek_isi_kuis = isset($key_data_kuis['kd_kuis']) ? $key_data_kuis['kd_kuis'] : '';
                             $kode2 = "QZ000";
                             $kodeurut2 = $kode2.$urut2;
-                            if($key_data_kuis['kd_kuis']==$kodeurut2 && $key_data_kuis['kd_jadwal']==$key_jadwal['kd_jadwal']) {
-                              echo "<th>Kuis ".$urut2++."</th>";
+
+                            foreach ($data_ket_kuis as $key_data_ket_kuis) {
+                              if($key_data_ket_kuis['kd_ket_kuis']==$kodeurut2) {
+                                  $tooltip_ket_kuis = $key_data_ket_kuis['keterangan_kuis'];
+                              
+                                  if($key_data_kuis['kd_kuis']==$kodeurut2 && $key_data_kuis['kd_jadwal']==$key_jadwal['kd_jadwal'] && $key_data_kuis['kd_jadwal']==$key_data_ket_kuis['kd_jadwal']) {
+                                    echo "<th>Kuis ".$urut2++." <a href='javascript:;'><i class='fa fa-question-circle fa-lg' data-toggle='tooltip' data-placement='top' title='$tooltip_ket_kuis'></i></a></th>";
+                                }
+                              }
                             }
                           }
 

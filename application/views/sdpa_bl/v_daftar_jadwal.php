@@ -1,3 +1,10 @@
+<?php
+$tahun     = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ;
+$semester  = isset($_POST['semester']) ? $_POST['semester'] : '' ;
+$semester = end($this->uri->segments);
+$sem = $this->uri->segment(3);
+ ?>
+
 <div class="x_title">
   <h2>Data Penilaian</h2>
   <div class="clearfix"></div>

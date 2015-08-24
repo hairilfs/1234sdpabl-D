@@ -8,6 +8,7 @@ $sem = $this->uri->segment(3);
 </div>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-latihan"><i class="fa fa-plus"></i> Latihan</button>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-kuis"><i class="fa fa-plus"></i> Kuis</button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-term"><i class="fa fa-plus"></i> Term</button>
 <?php
   foreach ($data_uts as $key_data_uts) {
   }
@@ -71,6 +72,8 @@ $sem = $this->uri->segment(3);
             echo "<th>Kuis ".$urut2++." <a href='javascript:;'><i class='fa fa-question-circle fa-lg' data-toggle='tooltip' data-placement='top' title='$tooltip_ket_kuis'></i></a></th>";
           }
         }
+
+
 
         $urut4 = 1;
         foreach ($data_uts as $key_data_uts) {
@@ -253,6 +256,81 @@ $sem = $this->uri->segment(3);
                 <?php
               }
               ?>
+            </tbody>
+          </table>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-success" name="save">Simpan</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TAMBAH TERM -->
+<div class="modal fade bs-example-modal" id="add-term" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel2">Tambah Term</h4>
+      </div>
+      <form class="" action="<?= base_url().'dashboard/isi_term/'.$sem.'/'.$key_peserta['kd_kelas'].'/'.$last; ?>" method="POST">
+        <div class="modal-body">
+          <table class="table table-bordered table-hover table-compact">
+            <!-- <thead>
+              <tr>
+                <th>No.</th>
+              </tr>
+            </thead> -->
+            <tbody>
+                <?php
+                  foreach ($data_LatihanTerm as $key_data_LatihanTerm) { ?>
+                      <input type="checkbox" name="select[]" 
+                      value="<?php
+                                foreach ($isi_peserta as $key_peserta) {
+                                    $urut = 1;
+                                    foreach ($data_latihan as $key_data_latihan) {
+                                      $kode = 'LT000';
+                                      $kodeurut = $kode.$urut;
+                                      if($key_data_latihan['kd_lat']==$key_data_LatihanTerm['kd_lat'] AND $key_peserta['nis']==$key_data_latihan['nis'] AND $key_data_latihan['kd_jadwal']==$last) {
+                                        $rol = isset($key_data_latihan['nilai']) ? $key_data_latihan['nilai'] : '0';
+                                        echo $key_peserta['nis'].'/'.$rol.',';
+                                        $urut++;
+                                      }
+                                    }
+                                }
+
+                            ?>" />
+                            <?= $key_data_LatihanTerm['kd_lat']; ?>
+                <?php
+                  }
+                ?>
+
+                <?php
+                  foreach ($data_KuisTerm as $key_data_KuisTerm) { ?>
+                      <input type="checkbox" name="select[]" 
+                      value="<?php
+                                foreach ($isi_peserta as $key_peserta) {
+                                    $urut = 1;
+                                    foreach ($data_kuis as $key_data_kuis) {
+                                      $kode = "QZ000";
+                                      $kodeurut = $kode.$urut;
+                                      if($key_data_kuis['kd_kuis']==$key_data_KuisTerm['kd_kuis'] AND $key_peserta['nis']==$key_data_kuis['nis'] AND $key_data_kuis['kd_jadwal']==$last) {
+                                        $rol = isset($key_data_kuis['nilai']) ? $key_data_kuis['nilai'] : '0';
+                                        echo $key_peserta['nis'].'/'.$rol.',';
+                                        $urut++;
+                                      }
+                                    }
+                                }
+
+                            ?>" />
+                            <?= $key_data_KuisTerm['kd_kuis']; ?>
+                <?php
+                  }
+                ?>
             </tbody>
           </table>
         </div>

@@ -64,6 +64,11 @@ class M_sdpa extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function cek_max_term($where) {
+		$query = $this->db->query("select max(kd_term) as maxterm from term ".$where);
+		return $query->result_array();
+	}
+
 	// DATA UTS
 	// cek max uts
 	public function cek_max_uts($where) {
@@ -109,6 +114,16 @@ class M_sdpa extends CI_Model {
 		$data = $this->db->query('select * from guru a, kelas b, siswa c, peserta d, walikelas e '.$where);
 		return $data->result_array();
 
+	}
+
+	public function getLatihanTerm($table, $where = "") {
+		$data = $this->db->query('select distinct kd_lat from '.$table.' '.$where);
+		return $data->result_array();
+	}
+
+	public function getKuisTerm($table, $where = "") {
+		$data = $this->db->query('select distinct kd_kuis from '.$table.' '.$where);
+		return $data->result_array();
 	}
 
 }

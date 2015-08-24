@@ -174,12 +174,14 @@ public function report_siswa() {
     }
 
     $data_ket_latihan = $this->m_sdpa->get_data("ket_latihan", "where semester='$semester' AND tahun='$tahun' ");
-    $data_ket_kuis= $this->m_sdpa->get_data("kuis", "where semester='$semester' AND tahun='$tahun' ");
+    $data_ket_kuis= $this->m_sdpa->get_data("ket_kuis", "where semester='$semester' AND tahun='$tahun' ");
     $data_mapel   = $this->m_sdpa->get_data("mapel");
     $data_siswa   = $this->m_sdpa->get_data("siswa");
     $data_guru2   = $this->m_sdpa->get_data("guru");
     $data_latihan = $this->m_sdpa->get_data("latihan", "where kd_jadwal in ($kd_jdw_now) order by kd_lat");
     $data_kuis    = $this->m_sdpa->get_data("kuis", "where kd_jadwal in ($kd_jdw_now) order by kd_kuis");
+    //$data_latihan_term = $this->m_sdpa->get_data("latihan", "where semester='$semester' AND tahun='$tahun' ");
+    //$data_kuis_term    = $this->m_sdpa->get_data("kuis", "where semester='$semester' AND tahun='$tahun' ");
     $data_uas     = $this->m_sdpa->get_data("uas", "where kd_jadwal in ($kd_jdw_now) order by kd_uas");
     $data_uts     = $this->m_sdpa->get_data("uts", "where kd_jadwal in ($kd_jdw_now) order by kd_uts");
 
@@ -193,10 +195,10 @@ public function report_siswa() {
     ));
 }
 
-public function daftar_jadwal() {
+public function daftar_jadwal($tahun='', $semester='') {
   $asd = $this->session->userdata('u_id');
-  $tahun     = isset($_POST['thn_ajar']) ? $_POST['thn_ajar'] : '' ;
-  $semester  = isset($_POST['semester']) ? $_POST['semester'] : '' ;
+  $tahun     = isset($_GET['thn_ajar']) ? $_GET['thn_ajar'] : '' ;
+  $semester  = isset($_GET['semester']) ? $_GET['semester'] : '' ;
 
   $data  = $this->m_sdpa->get_data("jadwal", "where thn_ajar='$tahun' and semester='$semester' and employee_id='$asd' ");
   $data2 = $this->m_sdpa->get_data("mapel");
@@ -208,22 +210,28 @@ public function daftar_jadwal() {
 
 
 public function master_nilai($semester,$kelas,$jadwal) {
+
   if(isset($kelas) AND isset($jadwal)) {
     $asd = $this->session->userdata('u_id');
     $data_guru = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
     $data_peserta = $this->m_sdpa->get_data("peserta", "where kd_kelas = '$kelas' ");
     $data_siswa = $this->m_sdpa->get_data("siswa");
     $data_latihan = $this->m_sdpa->get_data("latihan");
-    $data_kuis = $this->m_sdpa->get_data("kuis");
+    $data_kuis = $this->m_sdpa->get_data("kuis"); 
     $data_uas = $this->m_sdpa->get_data("uas", "where kd_jadwal='$jadwal' ");
     $data_uts = $this->m_sdpa->get_data("uts", "where kd_jadwal='$jadwal' ");
     $data2 = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
     $data_ket_latihan = $this->m_sdpa->get_data("ket_latihan", "where semester='$semester' AND kd_jadwal='$jadwal' ");
-    $data_ket_kuis = $this->m_sdpa->get_data("ket_kuis", "where semester='$semester' AND kd_jadwal='$jadwal' ");//
+    $data_ket_kuis = $this->m_sdpa->get_data("ket_kuis", "where semester='$semester' AND kd_jadwal='$jadwal' ");
+    $data_LatihanTerm = $this->m_sdpa->getLatihanTerm("latihan", "where tahun='2015/2016' and semester='$semester' and kd_jadwal='$jadwal' ");
+    $data_KuisTerm = $this->m_sdpa->getKuisTerm("kuis", "where tahun='2015/2016' and semester='$semester' and kd_jadwal='$jadwal' ");
+    //$data_latihan_term = $this->m_sdpa->get_data("latihan", "where semester='$semester' AND tahun='$tahun' ");
+    //$data_kuis_term    = $this->m_sdpa->get_data("kuis", "where semester='$semester' AND tahun='$tahun' ");
 
     $this->template->load('vtemplate_guru','sdpa_bl/v_data_nilai', array('data_latihan' => $data_latihan, 'a'=> $jadwal, 'isi' => $data_guru,
     'isi_peserta' => $data_peserta, 'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas, 'data_uts' => $data_uts,
-    'isi2' => $data2, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis));
+    'isi2' => $data2, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis, 'data_LatihanTerm' => $data_LatihanTerm, 
+    'data_KuisTerm' => $data_KuisTerm));
   } else {
     redirect("dashboard");
   }
@@ -326,6 +334,72 @@ public function isi_kuis($semester, $kelas, $jadwal) {
   );
 
   $this->m_sdpa->insert_data('ket_kuis', $data_keterangan);
+
+  redirect("dashboard/master_nilai/$semester/$kelas/$jadwal");
+}
+
+// ISI TERM
+public function isi_term($semester, $kelas, $jadwal) {
+  $asd = $this->session->userdata('u_id');
+  $data_guru = $this->m_sdpa->get_data("guru", "where employee_id = '$asd' ");
+  $data_peserta = $this->m_sdpa->get_data("peserta", "where kd_kelas = '$kelas' ");
+  $data_siswa = $this->m_sdpa->get_data("siswa");
+
+  $query = $this->db->query("select * from term where kd_jadwal='$jadwal'");
+  $maxdat = $this->m_sdpa->cek_max_term("where kd_jadwal='$jadwal' ");
+
+  foreach ($maxdat as $keymax) {
+  }
+  $isimax = $keymax['maxterm'];
+  if($query->num_rows() > 0 ) {
+    $a = substr($isimax, -1);
+    $b = substr($isimax,0,5); //QZ0001
+    $c = $a+1;
+    $kd_term = $b.$c;
+  } else {
+    $kd_term = "TR0001";
+  }
+
+  $tahun_skrng = date("Y");
+  $tahun_depan = date("Y")+1;
+  $tahun_yg_dicari = $tahun_skrng."/".$tahun_depan;
+  foreach ($data_peserta as $key_p) {
+      $as = $key_p['nis'];
+
+      $select= $_POST['select'];
+
+      $hitung = count($select);
+      $p = 0;
+      $l = 0;
+
+      for($i=0;$i<$hitung;$i++){
+
+        $x = explode(",", $select[$i]);
+        $y = count($x)-1;
+
+        for ($j=0; $j<$y ; $j++) { 
+          
+          $n[$j] = substr($x[$j], 0,7);
+          $m[$j] = substr($x[$j], 8,3);
+          
+          if($n[$j] == $key_p['nis']) {
+            $p = $p+1;
+            $l = $l+$m[$j];
+          } 
+        }        
+      }
+
+      $nilai_term = array(
+        'kd_term' => $kd_term,
+        'kd_jadwal'=> $jadwal,
+        'nis' => $key_p['nis'],
+        'nilai' => $_POST[$as],
+        'tahun' => $tahun_yg_dicari,
+        'semester' => $semester,
+        'nilai' => $l
+      );
+      $this->m_sdpa->insert_data('term', $nilai_term);
+  }
 
   redirect("dashboard/master_nilai/$semester/$kelas/$jadwal");
 }

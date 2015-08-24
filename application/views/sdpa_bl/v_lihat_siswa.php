@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-sis"><i class="fa fa-plus"></i> Tambah Data</button> 
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-sis"><i class="fa fa-plus"></i> Tambah Data</button>
 
 <table id="example" class="table table-striped responsive-utilities jambo_table">
     <thead>
@@ -22,8 +22,8 @@
     <tbody>
         <?php
             $no = 1;
-            foreach ($isi as $key) { 
-        ?>  
+            foreach ($isi as $key) {
+        ?>
 
         <tr class="even pointer">
             <td class="a-center ">
@@ -32,7 +32,7 @@
 
             <td style="text-align:center"><?= $no++ ?></td>
             <td style="text-align:center"><?= $key['NIS']; ?></td>
-            <td style="text-align:center"><?= $key['Nama']; ?></td>
+            <td><?= $key['Nama']; ?></td>
             <td style="text-align:center"><?= $key['Jenis_kelamin']; ?></td>
             <td style="text-align:center"><?= $key['Agama']; ?></td>
 
@@ -73,7 +73,7 @@
             </div>
         </div>
         <!-- /modal -->
-        
+
         <!-- ediy siswa -->
         <div class="modal fade bs-example-modal-lg" id="edit-sis<?= $key['NIS']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -102,7 +102,7 @@
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <input name="nis" type="hidden" class="form-control" value="<?= $key['NIS']; ?>">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">NISN</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="nisn" type="text" class="form-control" value="<?= $key['NISN']; ?>">
                                                     </div>
@@ -110,7 +110,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="nama" type="text" class="form-control" value="<?= $key['Nama']; ?>">
                                                     </div>
@@ -118,7 +118,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Tmpt Lahir</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="tempat_lahir" type="text" class="form-control" value="<?= $key['Tempat_lahir']; ?>" placeholder=" Contoh: Jakarta">
                                                     </div>
@@ -126,7 +126,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Tgl Lahir</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="tanggal_lahir" type="date" class="form-control" value="<?= $key['Tanggal_lahir']; ?>">
                                                     </div>
@@ -134,7 +134,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Agama</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="agama" class="form-control"  value="<?= $key['Agama']; ?>">
                                                             <option value="Islam" <?php if($key['Agama'] == 'Islam') echo 'selected="selected"'; ?>>Islam</option>
@@ -150,7 +150,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Jns Kelamin</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="jenis_kelamin" class="form-control" >
                                                             <option value="Laki-Laki" <?php if($key['Jenis_kelamin'] == 'Laki-Laki') echo 'selected="selected"'; ?>>Laki-Laki</option>
@@ -161,7 +161,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Foto</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="filefoto" type="file" class="form-control">
                                                     </div>
@@ -171,7 +171,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Ayah</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="nama_ayah" type="text" class="form-control" value="<?= $key['Nama_ayah']; ?>">
                                                     </div>
@@ -179,7 +179,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Ibu</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="nama_ibu" type="text" class="form-control" value="<?= $key['Nama_ibu']; ?>">
                                                     </div>
@@ -187,7 +187,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Kwn</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="kewarganegaraan" type="text" class="form-control" value="<?= $key['Kewarganegaraan']; ?>" placeholder=' Contoh: Indonesia'>
                                                     </div>
@@ -195,7 +195,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Warga</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="warga_negara" class="form-control" >
                                                             <option value="WNI" <?php if($key['Warga_negara'] == 'WNI') echo 'selected="selected"'; ?>>Warga Negara Indonesia (WNI)</option>
@@ -206,7 +206,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Anak</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="status_anak" class="form-control" >
                                                             <option value="Kandung" <?php if($key['Status_anak'] == 'Kandung') echo 'selected="selected"'; ?>>Kandung</option>
@@ -217,7 +217,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Alamat</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <textarea name="alamat" type="text" class="form-control"><?= $key['Alamat']; ?></textarea>
                                                     </div>
@@ -232,7 +232,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Tinggi</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="tinggi_badan" type="text" class="form-control" value="<?= $key['Tinggi_badan']; ?>" placeholder=" Contoh: 170">
                                                     </div>
@@ -240,7 +240,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Berat</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="berat_badan" type="text" class="form-control" value="<?= $key['Berat_badan']; ?>" placeholder=" Contoh: 60">
                                                     </div>
@@ -248,7 +248,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Anak Ke</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="anak_ke" type="number" class="form-control" value="<?= $key['Anak_ke']; ?>" placeholder=" Contoh: 1">
                                                     </div>
@@ -256,7 +256,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Jml Saudara</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="jumlah_saudara" type="number" class="form-control" value="<?= $key['Jumlah_saudara']; ?>" placeholder=" Contoh: 1">
                                                     </div>
@@ -264,7 +264,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Gol Darah</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="golongan_darah" class="form-control" >
                                                             <option value="A" <?php if($key['Golongan_darah'] == 'A') echo 'selected="selected"'; ?>>A</option>
@@ -277,7 +277,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Telp Rumah</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="telepon_rumah" type="text" class="form-control" value="<?= $key['Telepon_rumah']; ?>" placeholder=" Contoh: 0217338556">
                                                     </div>
@@ -285,7 +285,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">No. HP</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="nomor_hp" type="text" class="form-control" value="<?= $key['Nomor_hp']; ?>" placeholder=" Contoh: 087736317753">
                                                     </div>
@@ -295,7 +295,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Wajah</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="wajah" class="form-control" value="<?= $key['wajah']; ?>">
                                                             <option value="Bulat" <?php if($key['Wajah'] == 'Bulat') echo 'selected="selected"'; ?>>Bulat</option>
@@ -308,7 +308,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Rambut</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <select name="rambut" class="form-control" value="<?= $key['rambut']; ?>">
                                                             <option value="Ikal" <?php if($key['Rambut'] == 'Ikal') echo 'selected="selected"'; ?>>Ikal</option>
@@ -321,7 +321,7 @@
 
                                                 <div class="form-group" style="padding-bottom:8%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">AsalSekolah</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <input name="asal_sekolah" type="text" class="form-control" value="<?= $key['Asal_sekolah']; ?>">
                                                     </div>
@@ -329,7 +329,7 @@
 
                                                 <div class="form-group" style="padding-bottom:23%;">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Prestasi</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <textarea name="prestasi" type="text" class="form-control" placeholder=" Contoh: Juara 1 Olimpiade Bahasa Jerman"><?= $key['Prestasi']; ?></textarea>
                                                     </div>
@@ -337,7 +337,7 @@
 
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Penyakit</label>
-                                                    
+
                                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                                         <textarea name="penyakit_riwayat" type="text" class="form-control" placeholder=" Contoh: Diabetes Tipe 1, Demam Berdarah"><?= $key['Penyakit_riwayat']; ?></textarea>
                                                     </div>
@@ -427,7 +427,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-8 col-sm-12 col-xs-12" style="border:1px solid #e5e5e5;">
                                 <div class="dashboard-widget-content">
                                     <ul class="list-unstyled timeline widget">
@@ -457,13 +457,13 @@
                                                         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:left;">Warga Negara</div>
                                                         <div class="col-md-1 col-sm-4 col-xs-4"><b>:</b></div>
                                                         <div class="col-md-7 col-sm-7 col-xs-7"><?= $key['Warga_negara']; ?></div>
-                                                    </div>  
+                                                    </div>
 
                                                     <div class="form-group" style="padding-bottom:4%;">
                                                         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:left;">Status Anak</div>
                                                         <div class="col-md-1 col-sm-4 col-xs-4"><b>:</b></div>
                                                         <div class="col-md-7 col-sm-7 col-xs-7"><?= $key['Status_anak']; ?></div>
-                                                    </div>  
+                                                    </div>
 
                                                     <div class="form-group" style="padding-bottom:4%;">
                                                         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:left;">Anak Ke</div>
@@ -511,13 +511,13 @@
                                                         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:left;">Rambut</div>
                                                         <div class="col-md-1 col-sm-4 col-xs-4"><b>:</b></div>
                                                         <div class="col-md-7 col-sm-7 col-xs-7"><?= $key['Rambut']; ?></div>
-                                                    </div>  
+                                                    </div>
 
                                                     <div class="form-group" style="padding-bottom:4%;">
                                                         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:left;">Gol.Darah</div>
                                                         <div class="col-md-1 col-sm-4 col-xs-4"><b>:</b></div>
                                                         <div class="col-md-7 col-sm-7 col-xs-7"><?= $key['Golongan_darah']; ?></div>
-                                                    </div>  
+                                                    </div>
 
                                                     <div class="form-group" style="padding-bottom:4%;">
                                                         <div class="col-md-4 col-sm-4 col-xs-4" style="text-align:left;">Rwt. Penyakit</div>
@@ -552,8 +552,8 @@
         </div>
         <!-- /modals -->
 
-    <?php   
-        } 
+    <?php
+        }
     ?>
 
     </tbody>
@@ -569,7 +569,7 @@
             </div>
 
             <form class="form-horizontal form-label-left" action="<?= base_url(); ?>dashboard/do_insert_siswa" method="post" enctype="multipart/form-data">
-            
+
                 <!-- modal body -->
                 <div class="modal-body">
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -584,7 +584,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">NIS</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="nis" type="text" class="form-control">
                                             </div>
@@ -592,7 +592,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">NISN</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="nisn" type="text" class="form-control">
                                             </div>
@@ -600,7 +600,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="nama" type="text" class="form-control">
                                             </div>
@@ -608,7 +608,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tempat Lahir</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="tempat_lahir" type="text" class="form-control" placeholder=" Contoh: Jakarta">
                                             </div>
@@ -616,7 +616,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Lahir</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="tanggal_lahir" type="date" class="form-control">
                                             </div>
@@ -624,7 +624,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Agama</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <select name="agama" class="form-control" required>
                                                     <option>Pilih Agama</option>
@@ -641,7 +641,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis Kelamin</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <select name="jenis_kelamin" class="form-control" required>
                                                     <option>Pilih Jenis Kelamin</option>
@@ -653,7 +653,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Foto</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="filefoto" type="file" class="form-control" required>
                                             </div>
@@ -663,7 +663,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Ayah</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="nama_ayah" type="text" class="form-control" required>
                                             </div>
@@ -671,7 +671,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Ibu</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="nama_ibu" type="text" class="form-control">
                                             </div>
@@ -679,7 +679,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Kewarga negaraan</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="kewarganegaraan" type="text" class="form-control" placeholder=" Contoh: Indonesia">
                                             </div>
@@ -687,7 +687,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Warga Negara</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <select name="warga_negara" class="form-control" required>
                                                     <option>Pilih Warga Negara</option>
@@ -699,7 +699,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Anak</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <select name="status_anak" class="form-control" required>
                                                     <option>Pilih Status Anak</option>
@@ -711,14 +711,14 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Alamat</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <textarea name="alamat" type="text" class="form-control" required></textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>          
+                            </div>
 
                             <div role="tabpanel" class="tab-pane fade in" id="tab_content2_add" aria-labelledby="profile-tab">
                                 <div class="row">
@@ -726,7 +726,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tinggi Badan</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="tinggi_badan" type="number" class="form-control" placeholder=" Contoh: 170">
                                             </div>
@@ -734,7 +734,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Berat Badan</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="berat_badan" type="text" class="form-control" placeholder=" Contoh: 60">
                                             </div>
@@ -742,7 +742,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Anak Ke</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="anak_ke" type="number" class="form-control" placeholder=" Contoh: 1">
                                             </div>
@@ -750,7 +750,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Jumlah Saudara</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="jumlah_saudara" type="number" class="form-control" placeholder=" Contoh: 1">
                                             </div>
@@ -758,7 +758,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Gologan Darah</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <select name="golongan_darah" class="form-control" required>
                                                     <option>Pilih Golongan Darah</option>
@@ -772,7 +772,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Telepon Rumah</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="telepon_rumah" type="text" class="form-control" placeholder=" Contoh: 0217338556">
                                             </div>
@@ -780,7 +780,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Nomor HP</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="nomor_hp" type="text" class="form-control" placeholder=" Contoh: 087736317753">
                                             </div>
@@ -790,7 +790,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Wajah</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <select name="wajah" class="form-control" required>
                                                     <option>Pilih Wajah</option>
@@ -804,7 +804,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Rambut</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <select name="rambut" class="form-control" required>
                                                     <option>Pilih Rambut</option>
@@ -818,7 +818,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Asal Sekolah</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <input name="asal_sekolah" type="text" class="form-control">
                                             </div>
@@ -826,7 +826,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Prestasi</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <textarea name="prestasi" type="text" class="form-control" placeholder=" Contoh: Juara 1 Olimpiade Bahasa Jerman"></textarea>
                                             </div>
@@ -834,7 +834,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Penyakit Riwayat</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <textarea name="penyakit_riwayat" type="text" class="form-control" placeholder=" Contoh: Diabetes Tipe 1, Demam Berdarah"></textarea>
                                             </div>
@@ -842,9 +842,9 @@
 
                                     </div>
                                 </div>
-                            </div>          
+                            </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
 
                 <!-- modal footer -->
@@ -854,7 +854,7 @@
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
-            
+
             </form>
         </div>
     </div>

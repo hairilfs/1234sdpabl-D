@@ -4,6 +4,7 @@
 </div>
 <?php echo $this->session->flashdata('pesan'); ?>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-kls"><i class="fa fa-plus"></i> Tambah Data</button>
+<a href="<?= base_url();?>dashboard/cetak_laporan/kelas" target="_blank"><button type="button" class="btn btn-success"><i class="fa fa-print"></i> Cetak Laporan</button></a>
 <table id="example" class="table table-striped responsive-utilities jambo_table">
   <thead>
     <tr class="headings">

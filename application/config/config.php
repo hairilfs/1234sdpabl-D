@@ -18,6 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = '';
+$config['fonts_path'] = 'font';
 
 /*
 |--------------------------------------------------------------------------

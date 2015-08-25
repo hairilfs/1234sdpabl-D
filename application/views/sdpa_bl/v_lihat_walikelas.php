@@ -1,5 +1,5 @@
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-wakel"><i class="fa fa-plus"></i> Tambah Data</button> 
-
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-wakel"><i class="fa fa-plus"></i> Tambah Data</button>
+<a href="<?= base_url();?>dashboard/cetak_laporan/walikelas" target="_blank"><button type="button" class="btn btn-success"><i class="fa fa-print"></i> Cetak Laporan</button></a>
 <table id="example" class="table table-striped responsive-utilities jambo_table">
     <thead>
         <tr class="headings">
@@ -21,8 +21,8 @@
     <tbody>
         <?php
             $no = 1;
-            foreach ($isi as $key) { 
-        ?>  
+            foreach ($isi as $key) {
+        ?>
 
         <tr class="even pointer">
             <td class="a-center ">
@@ -70,7 +70,7 @@
             </div>
         </div>
         <!-- /modal -->
-        
+
         <!-- Update -->
         <!-- modal -->
         <div class="modal fade bs-example-modal-lg" id="edit-wakel<?= $key['Kd_walikelas']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
@@ -100,7 +100,7 @@
                                                     <input name="kd_walikelas" type="hidden" class="form-control" value="<?= $key['Kd_walikelas']; ?>">
                                                     <div class="form-group" style="padding-bottom:8%;">
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Tahun Ajar</label>
-                                                        
+
                                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                                             <select name="tahun_ajar_wali" class="form-control" value="<?= $key['Tahun_ajar_wali']; ?>">
                                                                 <option>Pilih Tahun Ajar</option>
@@ -117,14 +117,14 @@
 
                                                     <div class="form-group" style="padding-bottom:8%;">
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee ID</label>
-                                                        
+
                                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                                             <select name="employee_id" class="form-control">
                                                                 <option>Pilih Employee ID</option>
 
                                                                 <?php
 
-                                                                    foreach ($isi2 as $key2) { 
+                                                                    foreach ($isi2 as $key2) {
                                                                 ?>
                                                                         <option value="<?= $key2['employee_id'] ?>"><?= $key2['employee_id']?> - <?= $key2['nama_guru']?></option>
                                                                 <?php
@@ -139,14 +139,14 @@
 
                                                     <div class="form-group" style="padding-bottom:8%;">
                                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Kode Kelas</label>
-                                                        
+
                                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                                             <select name="kd_kelas" class="form-control" value="<?= $key['Kd_kelas']; ?>">
                                                                 <option>Pilih Kelas</option>
 
                                                                 <?php
 
-                                                                    foreach ($isi3 as $key3) { 
+                                                                    foreach ($isi3 as $key3) {
                                                                 ?>
                                                                         <option value="<?= $key3['kd_kelas'] ?>" <?php if ($key3['kd_kelas']==$key['Kd_kelas'])  echo " selected";?>><?= $key3['kd_kelas'] ?> - <?= $key3['nm_kelas'] ?></option>
                                                                 <?php
@@ -157,10 +157,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>          
+                                        </div>
                                     </div>
 
-                                </div>  
+                                </div>
                             </div>
 
                             <!-- modal footer -->
@@ -177,8 +177,8 @@
         </div>
         <!-- /modals -->
 
-    <?php   
-        } 
+    <?php
+        }
     ?>
 
     </tbody>
@@ -194,7 +194,7 @@
             </div>
 
             <form class="form-horizontal form-label-left" action="<?= base_url(); ?>dashboard/do_insert_walikelas" method="post">
-            
+
                 <!-- modal body -->
                 <div class="modal-body">
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -208,13 +208,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tahun Ajar Wali</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <select name="tahun_ajar_wali" class="form-control">
                                                     <option>Pilih Tahun Ajar</option>
 
                                                     <?php
-                                                        for ($i=2010; $i<=2020 ; $i++) { 
+                                                        for ($i=2010; $i<=2020 ; $i++) {
                                                     ?>
                                                         <option value="<?= $i; ?>/<?= $i+1; ?>"><?= $i; ?>/<?= $i+1; ?></option>
                                                     <?php
@@ -226,14 +226,14 @@
 
                                         <div class="form-group" style="padding-bottom:8%;">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Employee ID</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <select name="employee_id" class="form-control">
                                                     <option>Pilih Employee ID</option>
 
                                                     <?php
 
-                                                        foreach ($isi2 as $key2) { 
+                                                        foreach ($isi2 as $key2) {
                                                     ?>
                                                             <option value="<?= $key2['employee_id'] ?>"><?= $key2['employee_id']?> - <?= $key2['nama_guru']?></option>
                                                     <?php
@@ -248,14 +248,14 @@
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Kode Kelas</label>
-                                            
+
                                             <div class="col-md-9 col-sm-9 col-xs-12">
                                                 <select name="kd_kelas" class="form-control">
                                                     <option>Pilih Kelas</option>
 
                                                     <?php
 
-                                                        foreach ($isi3 as $key3) { 
+                                                        foreach ($isi3 as $key3) {
                                                     ?>
                                                             <option value="<?= $key3['kd_kelas'] ?>"><?= $key3['kd_kelas'] ?> - <?= $key3['nm_kelas'] ?></option>
                                                     <?php
@@ -266,9 +266,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>          
+                            </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
 
                 <!-- modal footer -->
@@ -278,7 +278,7 @@
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
-            
+
             </form>
         </div>
     </div>

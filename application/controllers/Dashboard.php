@@ -55,6 +55,37 @@ function logout() {
 
 }
 
+public function cetak_laporan($table = "") {
+  $data = $this->m_sdpa->get_data($table);
+  $file_lap = "";
+  switch ($table) {
+    case 'guru':
+      $file_lap = "guru";
+      break;
+    case 'siswa':
+      $file_lap = "siswa";
+      break;
+    case 'kelas':
+      $file_lap = "kelas";
+      break;
+    case 'walikelas':
+      $file_lap = "walikelas";
+      break;
+    case 'peserta':
+      $file_lap = "peserta  ";
+      break;
+    case 'mapel':
+      $file_lap = "mapel";
+      break;
+    case 'jadwal':
+      $file_lap = "jadwal";
+      break;
+    default:
+      $file_lap = "";
+      break;
+  }
+  $this->template->load('vtemplate_laporan','sdpa_bl_lap/v_lap_'.$file_lap, array('data_lap' => $data));
+}
 
 public function master_guru() {
 
@@ -217,7 +248,7 @@ public function master_nilai($semester,$kelas,$jadwal) {
     $data_peserta = $this->m_sdpa->get_data("peserta", "where kd_kelas = '$kelas' ");
     $data_siswa = $this->m_sdpa->get_data("siswa");
     $data_latihan = $this->m_sdpa->get_data("latihan");
-    $data_kuis = $this->m_sdpa->get_data("kuis"); 
+    $data_kuis = $this->m_sdpa->get_data("kuis");
     $data_uas = $this->m_sdpa->get_data("uas", "where kd_jadwal='$jadwal' ");
     $data_uts = $this->m_sdpa->get_data("uts", "where kd_jadwal='$jadwal' ");
     $data2 = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
@@ -230,7 +261,7 @@ public function master_nilai($semester,$kelas,$jadwal) {
 
     $this->template->load('vtemplate_guru','sdpa_bl/v_data_nilai', array('data_latihan' => $data_latihan, 'a'=> $jadwal, 'isi' => $data_guru,
     'isi_peserta' => $data_peserta, 'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas, 'data_uts' => $data_uts,
-    'isi2' => $data2, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis, 'data_LatihanTerm' => $data_LatihanTerm, 
+    'isi2' => $data2, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis, 'data_LatihanTerm' => $data_LatihanTerm,
     'data_KuisTerm' => $data_KuisTerm));
   } else {
     redirect("dashboard");
@@ -380,17 +411,22 @@ public function isi_term($semester, $kelas, $jadwal) {
         $x = explode(",", $select[$i]);
         $y = count($x)-1;
 
-        for ($j=0; $j<$y ; $j++) { 
-          
+        for ($j=0; $j<$y ; $j++) {
+
           $n[$j] = substr($x[$j], 0,7);
           $m[$j] = substr($x[$j], 8,3);
+<<<<<<< HEAD
           $o[$j] = substr($x[$j], 11,7);
 
           $gg = $o[$j];
           // $ggg = $m[$j];
+=======
+
+>>>>>>> origin/master
           if($n[$j] == $key_p['nis']) {
             //$p = $p+1;
             $l = $l+$m[$j];
+<<<<<<< HEAD
             $hasil_nilai = $l/$hitung;
           }
 
@@ -411,6 +447,9 @@ public function isi_term($semester, $kelas, $jadwal) {
           $s = $gg;
         } else {
           $s = $s."-".$gg;
+=======
+          }
+>>>>>>> origin/master
         }
       }
 

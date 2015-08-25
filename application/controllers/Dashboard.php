@@ -55,12 +55,36 @@ function logout() {
 
 }
 
-public function cetak_laporan() {
-  $this->load->library('fpdf');
-  define('FPDF_FONTPATH',$this->config->item('fonts_path'));
-  $data = $this->m_sdpa->get_data("guru");
-
-  $this->load->view('sdpa_bl/v_laporan', array('data_guru' => $data));
+public function cetak_laporan($table = "") {
+  $data = $this->m_sdpa->get_data($table);
+  $file_lap = "";
+  switch ($table) {
+    case 'guru':
+      $file_lap = "guru";
+      break;
+    case 'siswa':
+      $file_lap = "siswa";
+      break;
+    case 'kelas':
+      $file_lap = "kelas";
+      break;
+    case 'walikelas':
+      $file_lap = "walikelas";
+      break;
+    case 'peserta':
+      $file_lap = "peserta  ";
+      break;
+    case 'mapel':
+      $file_lap = "mapel";
+      break;
+    case 'jadwal':
+      $file_lap = "jadwal";
+      break;
+    default:
+      $file_lap = "";
+      break;
+  }
+  $this->template->load('vtemplate_laporan','sdpa_bl_lap/v_lap_'.$file_lap, array('data_lap' => $data));
 }
 
 public function master_guru() {

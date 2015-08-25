@@ -4,6 +4,7 @@
 </div>
 <?php echo $this->session->flashdata('pesan'); ?>
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-jadwal"><i class="fa fa-plus"></i> Tambah Data</button>
+<a href="<?= base_url();?>dashboard/cetak_laporan/jadwal" target="_blank"><button type="button" class="btn btn-success"><i class="fa fa-print"></i> Cetak Laporan</button></a>
 <table id="example" class="table table-striped responsive-utilities jambo_table">
   <thead>
     <tr class="headings">
@@ -82,7 +83,7 @@
                         <div id="myTabContent" class="tab-content">
                           <!-- tab panel ke 1 -->
                           <div role="tabpanel" class="tab-pane fade active in" id="tab_content1_edit" aria-labelledby="home-tab">
-                              <div class="row">    
+                              <div class="row">
                                   <div class="form-group" style="padding-bottom:6%;">
                                     <label class="control-label col-md-4 col-sm-3 col-xs-12">Kode Jadwal</label>
                                     <div class="col-md-8 col-sm-9 col-xs-12">
@@ -128,7 +129,7 @@
                                       <select name="employee_id" class="form-control">
                                           <?php
 
-                                              foreach ($isi3 as $key3) { 
+                                              foreach ($isi3 as $key3) {
                                           ?>
                                                   <option value="<?= $key3['employee_id'] ?>" <?php if($key3['employee_id'] == $key['employee_id']) echo "selected"; ?>><?= $key3['employee_id']?> - <?= $key3['nama_guru']?></option>
                                           <?php
@@ -145,7 +146,7 @@
 
                                           <?php
 
-                                              foreach ($isi4 as $key4) { 
+                                              foreach ($isi4 as $key4) {
                                           ?>
                                                   <option value="<?= $key4['kd_kelas'] ?>" <?php if($key4['kd_kelas'] == $key['kd_kelas']) echo "selected"; ?>><?= $key4['kd_kelas']?> - <?= $key4['nm_kelas']?></option>
                                           <?php
@@ -227,14 +228,14 @@
                     <div class="block">
                       <div class="block_content">
                         <h2 class="title" style="font-weight: bold;">Kode Mapel</h2>
-                        <?php 
-                            foreach ($isi2 as $key2){ 
-                                if($key2['kd_mapel']==$key['kd_mapel']){ 
+                        <?php
+                            foreach ($isi2 as $key2){
+                                if($key2['kd_mapel']==$key['kd_mapel']){
                         ?>
                                     <p class="excerpt"><?= $key['kd_mapel'].' - '.$key2['nm_mapel'];?></p>
-                        <?php 
+                        <?php
                                 }
-                            } 
+                            }
                         ?>
                       </div>
                     </div>
@@ -243,14 +244,14 @@
                     <div class="block">
                       <div class="block_content">
                         <h2 class="title" style="font-weight: bold;">Emp. ID</h2>
-                        <?php 
-                            foreach ($isi3 as $key3){ 
-                                if($key3['employee_id'] == $key['employee_id']){ 
+                        <?php
+                            foreach ($isi3 as $key3){
+                                if($key3['employee_id'] == $key['employee_id']){
                         ?>
                                     <p class="excerpt"><?= $key['employee_id'].' - '.$key3['nama_guru'];?></p>
-                        <?php 
+                        <?php
                                 }
-                            } 
+                            }
                         ?>
                       </div>
                     </div>
@@ -259,14 +260,14 @@
                     <div class="block">
                       <div class="block_content">
                         <h2 class="title" style="font-weight: bold;">Kode Kelas</h2>
-                        <?php 
-                            foreach ($isi4 as $key4){ 
-                                if($key4['kd_kelas'] == $key['kd_kelas']){ 
+                        <?php
+                            foreach ($isi4 as $key4){
+                                if($key4['kd_kelas'] == $key['kd_kelas']){
                         ?>
                                     <p class="excerpt"><?= $key['kd_kelas'].' - '.$key4['nm_kelas'];?></p>
-                        <?php 
+                        <?php
                                 }
-                            } 
+                            }
                         ?>
                       </div>
                     </div>
@@ -327,7 +328,7 @@
                   <option>Pilih Tahun Ajar</option>
 
                   <?php
-                      for ($i=2010; $i<=2020 ; $i++) { 
+                      for ($i=2010; $i<=2020 ; $i++) {
                   ?>
                       <option value="<?= $i; ?>/<?= $i+1; ?>"><?= $i; ?>/<?= $i+1; ?></option>
                   <?php
@@ -365,7 +366,7 @@
 
                   <?php
 
-                      foreach ($isi3 as $key3) { 
+                      foreach ($isi3 as $key3) {
                   ?>
                           <option value="<?= $key3['employee_id'] ?>"><?= $key3['employee_id']?> - <?= $key3['nama_guru']?></option>
                   <?php
@@ -382,7 +383,7 @@
 
                   <?php
 
-                      foreach ($isi4 as $key4) { 
+                      foreach ($isi4 as $key4) {
                   ?>
                           <option value="<?= $key4['kd_kelas'] ?>"><?= $key4['kd_kelas']?> - <?= $key4['nm_kelas']?></option>
                   <?php

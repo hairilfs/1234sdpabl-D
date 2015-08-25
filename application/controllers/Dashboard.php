@@ -55,6 +55,13 @@ function logout() {
 
 }
 
+public function cetak_laporan() {
+  $this->load->library('fpdf');
+  define('FPDF_FONTPATH',$this->config->item('fonts_path'));
+  $data = $this->m_sdpa->get_data("guru");
+
+  $this->load->view('sdpa_bl/v_laporan', array('data_guru' => $data));
+}
 
 public function master_guru() {
 
@@ -217,7 +224,7 @@ public function master_nilai($semester,$kelas,$jadwal) {
     $data_peserta = $this->m_sdpa->get_data("peserta", "where kd_kelas = '$kelas' ");
     $data_siswa = $this->m_sdpa->get_data("siswa");
     $data_latihan = $this->m_sdpa->get_data("latihan");
-    $data_kuis = $this->m_sdpa->get_data("kuis"); 
+    $data_kuis = $this->m_sdpa->get_data("kuis");
     $data_uas = $this->m_sdpa->get_data("uas", "where kd_jadwal='$jadwal' ");
     $data_uts = $this->m_sdpa->get_data("uts", "where kd_jadwal='$jadwal' ");
     $data2 = $this->m_sdpa->get_data("guru", "where employee_id in (select b.Employee_id from walikelas b) and employee_id = '$asd'");
@@ -230,7 +237,7 @@ public function master_nilai($semester,$kelas,$jadwal) {
 
     $this->template->load('vtemplate_guru','sdpa_bl/v_data_nilai', array('data_latihan' => $data_latihan, 'a'=> $jadwal, 'isi' => $data_guru,
     'isi_peserta' => $data_peserta, 'isi_siswa' => $data_siswa, 'data_kuis' => $data_kuis, 'data_uas' => $data_uas, 'data_uts' => $data_uts,
-    'isi2' => $data2, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis, 'data_LatihanTerm' => $data_LatihanTerm, 
+    'isi2' => $data2, 'data_ket_latihan' => $data_ket_latihan, 'data_ket_kuis' => $data_ket_kuis, 'data_LatihanTerm' => $data_LatihanTerm,
     'data_KuisTerm' => $data_KuisTerm));
   } else {
     redirect("dashboard");
@@ -377,16 +384,16 @@ public function isi_term($semester, $kelas, $jadwal) {
         $x = explode(",", $select[$i]);
         $y = count($x)-1;
 
-        for ($j=0; $j<$y ; $j++) { 
-          
+        for ($j=0; $j<$y ; $j++) {
+
           $n[$j] = substr($x[$j], 0,7);
           $m[$j] = substr($x[$j], 8,3);
-          
+
           if($n[$j] == $key_p['nis']) {
             $p = $p+1;
             $l = $l+$m[$j];
-          } 
-        }        
+          }
+        }
       }
 
       $nilai_term = array(

@@ -288,7 +288,7 @@ $sem = $this->uri->segment(3);
             <tbody>
                 <?php
                   foreach ($data_LatihanTerm as $key_data_LatihanTerm) { ?>
-                      <input type="checkbox" name="select[]" 
+                      <input type="checkbox" name="select[]" class="icheckbox_flat-green"
                       value="<?php
                                 foreach ($isi_peserta as $key_peserta) {
                                     $urut = 1;
@@ -297,7 +297,8 @@ $sem = $this->uri->segment(3);
                                       $kodeurut = $kode.$urut;
                                       if($key_data_latihan['kd_lat']==$key_data_LatihanTerm['kd_lat'] AND $key_peserta['nis']==$key_data_latihan['nis'] AND $key_data_latihan['kd_jadwal']==$last) {
                                         $rol = isset($key_data_latihan['nilai']) ? $key_data_latihan['nilai'] : '0';
-                                        echo $key_peserta['nis'].'/'.$rol.',';
+                                        //echo $key_peserta['nis'].'/'.$rol.',';
+                                        echo $key_peserta['nis'].'/'.$rol.'!'.$key_data_latihan['kd_lat'].',';
                                         $urut++;
                                       }
                                     }
@@ -308,10 +309,11 @@ $sem = $this->uri->segment(3);
                 <?php
                   }
                 ?>
+                <br/>
 
                 <?php
                   foreach ($data_KuisTerm as $key_data_KuisTerm) { ?>
-                      <input type="checkbox" name="select[]" 
+                      <input type="checkbox" name="select[]" class="icheckbox_flat-green"
                       value="<?php
                                 foreach ($isi_peserta as $key_peserta) {
                                     $urut = 1;
@@ -320,7 +322,7 @@ $sem = $this->uri->segment(3);
                                       $kodeurut = $kode.$urut;
                                       if($key_data_kuis['kd_kuis']==$key_data_KuisTerm['kd_kuis'] AND $key_peserta['nis']==$key_data_kuis['nis'] AND $key_data_kuis['kd_jadwal']==$last) {
                                         $rol = isset($key_data_kuis['nilai']) ? $key_data_kuis['nilai'] : '0';
-                                        echo $key_peserta['nis'].'/'.$rol.',';
+                                        echo $key_peserta['nis'].'/'.$rol.'!'.$key_data_kuis['kd_kuis'].',';
                                         $urut++;
                                       }
                                     }
@@ -331,6 +333,7 @@ $sem = $this->uri->segment(3);
                 <?php
                   }
                 ?>
+                <br/>
             </tbody>
           </table>
         </div>

@@ -347,13 +347,15 @@ public function isi_term($semester, $kelas, $jadwal) {
 
   $query = $this->db->query("select * from term where kd_jadwal='$jadwal'");
   $maxdat = $this->m_sdpa->cek_max_term("where kd_jadwal='$jadwal' ");
+  $data_latihan = $this->m_sdpa->get_data("latihan","where kd_jadwal = '$jadwal' and semester='$semester'");
+  $data_kuis = $this->m_sdpa->get_data("kuis","where kd_jadwal = '$jadwal' and semester='$semester'");
 
-  foreach ($maxdat as $keymax) {
-  }
+  foreach ($maxdat as $keymax) {}
+
   $isimax = $keymax['maxterm'];
   if($query->num_rows() > 0 ) {
     $a = substr($isimax, -1);
-    $b = substr($isimax,0,5); //QZ0001
+    $b = substr($isimax,0,5);
     $c = $a+1;
     $kd_term = $b.$c;
   } else {
@@ -369,8 +371,9 @@ public function isi_term($semester, $kelas, $jadwal) {
       $select= $_POST['select'];
 
       $hitung = count($select);
-      $p = 0;
+      //$p = 0;
       $l = 0;
+      $s = "";
 
       for($i=0;$i<$hitung;$i++){
 
@@ -381,12 +384,34 @@ public function isi_term($semester, $kelas, $jadwal) {
           
           $n[$j] = substr($x[$j], 0,7);
           $m[$j] = substr($x[$j], 8,3);
-          
+          $o[$j] = substr($x[$j], 11,7);
+
+          $gg = $o[$j];
+          // $ggg = $m[$j];
           if($n[$j] == $key_p['nis']) {
-            $p = $p+1;
+            //$p = $p+1;
             $l = $l+$m[$j];
-          } 
-        }        
+            $hasil_nilai = $l/$hitung;
+          }
+
+          foreach ($data_latihan as $key_data_latihan) {
+              if($o[$j]==$key_data_latihan['kd_lat']) {
+                $gg = $o[$j];
+              }
+          }
+
+          foreach ($data_kuis as $key_data_kuis) {
+              if($o[$j]==$key_data_kuis['kd_kuis']) {
+                $gg = $o[$j];
+              }
+          }
+        }
+
+        if($s == "") {
+          $s = $gg;
+        } else {
+          $s = $s."-".$gg;
+        }
       }
 
       $nilai_term = array(
@@ -396,7 +421,8 @@ public function isi_term($semester, $kelas, $jadwal) {
         'nilai' => $_POST[$as],
         'tahun' => $tahun_yg_dicari,
         'semester' => $semester,
-        'nilai' => $l
+        'nilai' => $hasil_nilai,
+        'ket' => $s
       );
       $this->m_sdpa->insert_data('term', $nilai_term);
   }
